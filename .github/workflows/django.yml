@@ -17,14 +17,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: set up python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
-      - name: install dependencies
+      - name: install backend dependencies
+        working-directory: dellocred-backend
         run: |
           python -m pip install --upgrade pip
-          pip install -r dellocred-backend/requirements.txt
-      - name: run tests
+          pip install -r requirements.txt
+      - name: run backend tests
+        working-directory: dellocred-backend
         run: |
           python manage.py test
