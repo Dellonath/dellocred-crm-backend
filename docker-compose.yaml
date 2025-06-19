@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+
+  dellocred-backend:
+    build:
+      context: ./dellocred-backend
+    container_name: dellocred_crm_backend
+    image: dellocred-crm-backend:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=dellocred_backend.settings
+
+  dellocred-frontend:
+    build:
+      context: ./dellocred-frontend
+    container_name: dellocred_crm_frontend
+    image: dellocred-crm-frontend:latest
+    ports:
+      - "80:80"

@@ -1,0 +1,31 @@
+# Ignore the python virtual environment
+.venv
+
+# Igone node_modules
+node_modules
+
+# Ignore build artifacts
+build
+dist
+
+# Ignore log files
+*.log
+
+# Ignore environment files
+.env
+
+# Ignore coverage reports
+coverage
+
+# Ignore temporary files
+*.tmp
+
+# Ignore IDE files
+.idea
+
+# Ignore Python cache files
+__pycache__
+*.pyc
+*.pyo
+
+
