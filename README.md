@@ -46,3 +46,4 @@
 - ```docker compose ps``` list running services
 - ```docker compose logs``` view logs for all services
 - ```docker compose exec <service_name> <command>``` execute a command in a
+- ```docker compose up --build -d``` builds images if not exists and then starts all the services in background
