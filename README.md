@@ -1,18 +1,5 @@
 # Dellocred CRM
 
-## Relevant Commands
-
-### Django
-- ```django-admin startproject <project_name>```
-- ```python manage.py startapp <app_name>```
-- ```python manage.py makemigrations```
-- ```python manage.py migrate```
-
-### Docker
-- ```docker build . -t <image_name>```
-- ```docker run --name <container_name> <image_name>```
-- ```docker-compose up --build```
-
 ## Conventional Commits
 
 - ```feat``` a new feature
@@ -27,7 +14,16 @@
 - ```chore``` other changes that don’t modify src or test files
 - ```revert``` reverts a previous commit
 
-## Docker Commands
+## Commands
+
+### Django
+- ```django-admin startproject <project_name>``` creates a new Django project with the specified name
+- ```python manage.py startapp <app_name>``` creates a new Django app within your project
+- ```python manage.py makemigrations``` creates new migration files based on the changes you have made to your models
+- ```python manage.py migrate``` applies the migrations to your database, updating it to match your models
+- ```python manage.py test <app_name>``` test a specific described app
+
+### Docker
 
 - ```docker ps -a``` list all containers (including stopped)
 - ```docker images``` list all images
@@ -38,7 +34,7 @@
 - ```docker logs <container_name>``` view logs of a container
 - ```docker exec -it <container_name> /bin/bash``` access a running container’s shell
 
-## Docker Compose Commands
+### Docker Compose
 
 - ```docker compose up -d``` start all services in the background
 - ```docker compose down``` stop and remove all services
