@@ -19,7 +19,7 @@
 ### Django
 - ```django-admin startproject <project_name>``` creates a new Django project with the specified name
 - ```python manage.py startapp <app_name>``` creates a new Django app within your project
-- ```python manage.py makemigrations``` creates new migration files based on the changes you have made to your models
+- ```python manage.py makemigrations <app_name>``` creates new migration files based on the changes you have made to your models
 - ```python manage.py migrate``` applies the migrations to your database, updating it to match your models
 - ```python manage.py test <app_name>``` test a specific described app
 
@@ -36,8 +36,8 @@
 
 ### Docker Compose
 
-- ```docker compose up -d``` start all services in the background
-- ```docker compose down``` stop and remove all services
+- ```docker compose up [-d]``` start all services in the background, use -d to decouple execution (execute in backgroud)
+- ```docker compose down [-v]``` stop and remove all services, use -v if want to delete volume
 - ```docker compose build``` build or rebuild services
 - ```docker compose ps``` list running services
 - ```docker compose logs``` view logs for all services
