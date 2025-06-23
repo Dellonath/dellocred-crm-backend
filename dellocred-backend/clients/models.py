@@ -1,5 +1,4 @@
 import uuid
-import datetime
 import re
 from django.db import models
 from django.core.exceptions import ValidationError
@@ -52,21 +51,20 @@ def validate_national_id(
         raise ValidationError(f'Invalid value {value} number')
 
 class Client(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    national_id = models.CharField(unique=True, max_length=11)
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    profession = models.EmailField(unique=True)
-    phone_number = models.CharField(unique=True, max_length=20)
-    birth_date = models.DateField()
-    phone_number = models.CharField(unique=True, max_length=20)
-    postal_code = models.CharField(max_length=20)
-    state = models.CharField(max_length=2)
-    city = models.CharField(max_length=50)
-    address = models.CharField(max_length=50)
-    address_number = models.CharField(max_length=50)
-    address_complement = models.CharField(max_length=50)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    national_id = models.CharField(unique=True, max_length=11, validators=[validate_national_id])
+    first_name = models.CharField(max_length=100, default=None)
+    last_name = models.CharField(max_length=100, default=None)
+    email = models.EmailField(unique=True, validators=[validate_email], default=None)
+    phone_number = models.CharField(unique=True, max_length=20, default=None)
+    birth_date = models.DateField(null=True)
+    profession = models.CharField(unique=True, null=True)
+    postal_code = models.CharField(max_length=20, null=True)
+    state = models.CharField(max_length=2, null=True, validators=[validate_state])
+    city = models.CharField(max_length=50, null=True)
+    address = models.CharField(max_length=50, null=True)
+    address_number = models.CharField(max_length=50, null=True)
+    address_complement = models.CharField(max_length=50, null=True)
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(default=timezone.now)
     

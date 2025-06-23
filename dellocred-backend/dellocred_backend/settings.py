@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'dellocred_crm_db',
         'USER': 'admin',
         'PASSWORD': 'adminadmin',
-        'HOST': 'dellocred-database',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }
