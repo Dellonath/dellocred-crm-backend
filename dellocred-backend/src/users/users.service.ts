@@ -14,10 +14,6 @@ export class UsersService {
   ) {}
 
   create(user: CreateUserDto): Promise<User | null> {
-
-    if (!user.firstName || !user.email) {
-      throw new BadRequestException('Both name and email must be provided');
-    }
     return this.usersRepository.save(user);
   }
 

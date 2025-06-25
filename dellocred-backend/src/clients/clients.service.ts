@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, HttpStatus} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, FindOptionsWhere, UpdateResult, Repository } from 'typeorm';
 import { Client } from './clients.entity';
@@ -13,27 +13,55 @@ export class ClientsService {
     private clientsRepository: Repository<Client>,
   ) {}
 
-  create(client: CreateClientDto): Promise<Client | null> {
-
-    if (!client.firstName || !client.lastName) {
-      throw new BadRequestException('Both name and last name must be provided');
+  async create(client: CreateClientDto): Promise<Client | null> {
+    try {
+      return await this.clientsRepository.save(client);
+    } catch (error) {
+      throw new BadRequestException(error.message);
     }
-    return this.clientsRepository.save(client);
   }
 
-  findAll(): Promise<Client[]> {
-    return this.clientsRepository.find();
-  }
+  async createBatch(
+    clientsBatch: CreateClientDto[],
+  ): Promise<{ client: CreateClientDto; status: HttpStatus; message: string }[]> {
+    
+    const results: {
+      client: CreateClientDto;
+      status: HttpStatus;
+      message: string;
+    }[] = [];
 
-  findOne(uuid: FindOptionsWhere<Client>): Promise<Client | null> {
-  return this.clientsRepository.findOneBy(uuid);
+    for (const client of clientsBatch) {
+      try {
+        await this.clientsRepository.save(client);
+        results.push({ client, status: HttpStatus.CREATED, message: 'Created successfully' });
+      } catch (error) {
+        results.push({ client, status: HttpStatus.BAD_REQUEST, message: error.message });
+      }
+    }
+
+    return results;
 }
-  
-  update(uuid: string, client: UpdateClientDto): Promise<UpdateResult | null> {
-    return this.clientsRepository.update(uuid, client);
+
+  async findAll(): Promise<Client[]> {
+    return await this.clientsRepository.find();
   }
 
-  remove(uuid: string): Promise<DeleteResult | void> {
-    return this.clientsRepository.delete(uuid);
+  async findAllActives(): Promise<Client[]> {
+    return await this.clientsRepository.find({
+      where: { isActive: true },
+    });
+  }
+
+  async findOne(gov_id: FindOptionsWhere<Client>): Promise<Client | null> {
+    return await this.clientsRepository.findOneBy(gov_id);
+  }
+  
+  async update(uuid: string, client: UpdateClientDto): Promise<UpdateResult | null> {
+    return await this.clientsRepository.update(uuid, client);
+  }
+
+  async remove(uuid: string): Promise<DeleteResult | void> {
+    return await this.clientsRepository.delete(uuid);
   }
 }
