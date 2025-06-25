@@ -1,5 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { DeleteResult, UpdateResult, FindOptionsWhere } from 'typeorm';
 import { UsersService } from './users.service';
+import { User } from './users.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
@@ -8,27 +10,27 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
+  async create(@Body() user: CreateUserDto): Promise<User | null> {
+    return this.usersService.create(user);
   }
 
   @Get()
-  findAll(): string {
+  findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
   
-  @Get(':id')
-  findOne(@Param('id') id: string): string {
-    return this.usersService.findOne(Number(id));
+  @Get(':uuid')
+  findOne(@Param('uuid') uuid: FindOptionsWhere<User>): Promise<User | null> {
+    return this.usersService.findOne(uuid);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+  @Patch(':uuid')
+  update(@Param('uuid') uuid: string, @Body() user: UpdateUserDto) : Promise<UpdateResult | null> {
+    return this.usersService.update(uuid, user);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string): string {
-    return this.usersService.remove(Number(id));
+  @Delete(':uuid')
+  remove(@Param('uuid') uuid: string): Promise<DeleteResult | void> {
+    return this.usersService.remove(uuid);
   }
 }
