@@ -1,9 +1,9 @@
-import { Injectable, BadRequestException, HttpStatus} from '@nestjs/common';
+import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, FindOptionsWhere, UpdateResult, Repository } from 'typeorm';
-import { Client } from './clients.entity';
+import { DeleteResult, FindOptionsWhere, Repository, UpdateResult } from 'typeorm';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { Client } from './entities/clients.entity';
 
 @Injectable()
 export class ClientsService {

@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpStatus } from '@nestjs/common';
-import { DeleteResult, UpdateResult, FindOptionsWhere } from 'typeorm';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { DeleteResult, FindOptionsWhere, UpdateResult } from 'typeorm';
 import { ClientsService } from './clients.service';
-import { Client } from './clients.entity';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
+import { Client } from './entities/clients.entity';
 
 @Controller('clients')
 export class ClientsController {
