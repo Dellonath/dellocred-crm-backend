@@ -1,6 +1,6 @@
 import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, FindOptionsWhere, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/clients.entity';
@@ -8,60 +8,50 @@ import { Client } from './entities/clients.entity';
 @Injectable()
 export class ClientsService {
 
-  constructor(
-    @InjectRepository(Client)
-    private clientsRepository: Repository<Client>,
-  ) {}
+  constructor(@InjectRepository(Client) private repository: Repository<Client>) {}
 
-  async create(client: CreateClientDto): Promise<Client | null> {
+  create(dto: CreateClientDto): Promise<Client | null> {
     try {
-      return await this.clientsRepository.save(client);
+      return this.repository.save(dto)
     } catch (error) {
       throw new BadRequestException(error.message);
     }
   }
 
-  async createBatch(
-    clientsBatch: CreateClientDto[],
-  ): Promise<{ client: CreateClientDto; status: HttpStatus; message: string }[]> {
-    
-    const results: {
-      client: CreateClientDto;
-      status: HttpStatus;
-      message: string;
-    }[] = [];
-
-    for (const client of clientsBatch) {
-      try {
-        await this.clientsRepository.save(client);
-        results.push({ client, status: HttpStatus.CREATED, message: 'Created successfully' });
-      } catch (error) {
-        results.push({ client, status: HttpStatus.BAD_REQUEST, message: error.message });
-      }
-    }
-
-    return results;
-}
+  async createByBatch(dtoBatch: CreateClientDto[]): Promise<{ statusCode?: HttpStatus, message?: string }[]> {
+    return Promise.all(
+      dtoBatch.map(async (dto) => {
+        try {
+          const client = await this.repository.save(dto);
+          return { statusCode: HttpStatus.CREATED, message: 'OK' };
+        } catch (error) {
+          return { statusCode: HttpStatus.BAD_REQUEST, message: error.message };
+        }
+      })
+    );
+  }
 
   async findAll(): Promise<Client[]> {
-    return await this.clientsRepository.find();
+    return await this.repository.find();
   }
 
   async findAllActives(): Promise<Client[]> {
-    return await this.clientsRepository.find({
+    return await this.repository.find({
       where: { isActive: true },
     });
   }
 
-  async findOne(gov_id: FindOptionsWhere<Client>): Promise<Client | null> {
-    return await this.clientsRepository.findOneBy(gov_id);
+  async findOneByGovId(govId: string): Promise<Client | null> {
+    return await this.repository.findOne({ 
+      where: { govId }
+    });
   }
   
-  async update(uuid: string, client: UpdateClientDto): Promise<UpdateResult | null> {
-    return await this.clientsRepository.update(uuid, client);
+  async update(govId: string, dto: UpdateClientDto): Promise<UpdateResult | null> {
+    return await this.repository.update({ govId }, dto);
   }
 
-  async remove(uuid: string): Promise<DeleteResult | void> {
-    return await this.clientsRepository.delete(uuid);
+  async remove(govId: string): Promise<DeleteResult | void> {
+    return await this.repository.delete({ govId });
   }
 }

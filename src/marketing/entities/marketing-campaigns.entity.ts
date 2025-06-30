@@ -5,7 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { CampaignChannel, CampaignStatus } from './enums/marketing.campaigns.enums';
+import { CampaignChannel, CampaignStatus } from './marketing-campaigns.enums';
 
 @Entity({ name: 'marketing_campaigns' })
 export class MarketingCampaign {

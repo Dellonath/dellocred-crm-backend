@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
 import { ClientsModule } from './clients/clients.module';
 import { MarketingModule } from './marketing/marketing.module';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -22,7 +22,8 @@ import { MarketingModule } from './marketing/marketing.module';
       synchronize: true,
     }),
     UsersModule, 
-    ClientsModule, MarketingModule
+    ClientsModule, 
+    MarketingModule
   ],
   controllers: [AppController],
   providers: [AppService],

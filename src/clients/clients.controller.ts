@@ -1,5 +1,5 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post } from '@nestjs/common';
-import { DeleteResult, FindOptionsWhere, UpdateResult } from 'typeorm';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { DeleteResult, UpdateResult } from 'typeorm';
 import { ClientsService } from './clients.service';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
@@ -7,19 +7,18 @@ import { Client } from './entities/clients.entity';
 
 @Controller('clients')
 export class ClientsController {
+
   constructor(private readonly clientsService: ClientsService) {}
 
   @Post()
-  async create(@Body() client: CreateClientDto): Promise<Client | null> {
-    return await this.clientsService.create(client);
+  create(@Body() dto: CreateClientDto): Promise<Client> {
+    return this.clientsService.create(dto);
   }
 
   @Post('batch')
-  async createBatch(
-    @Body() clients: CreateClientDto[]
-  ): Promise<{ client: CreateClientDto; status: HttpStatus; message: string }[]> {
-
-    return await this.clientsService.createBatch(clients);
+  @HttpCode(207)
+  async createByBatch(@Body() dto: CreateClientDto[]): Promise<{ statusCode?: HttpStatus, error?: string }[]> {
+    return await this.clientsService.createByBatch(dto);
   }
 
   @Get()
@@ -32,18 +31,18 @@ export class ClientsController {
     return await this.clientsService.findAllActives();
   }
 
-  @Get(':gov_id')
-  async findOne(@Param('gov_id') gov_id: FindOptionsWhere<Client>): Promise<Client | null> {
-    return await this.clientsService.findOne(gov_id);
+  @Get(':govId')
+  async findOneByGovId(@Param('govId') govId: string): Promise<Client | null> {
+    return await this.clientsService.findOneByGovId(govId);
   }
 
-  @Patch(':uuid')
-  async update(@Param('uuid') uuid: string, @Body() client: UpdateClientDto) : Promise<UpdateResult | null> {
-    return await this.clientsService.update(uuid, client);
+  @Patch(':govId')
+  async update(@Param('govId') govId: string, @Body() dto: UpdateClientDto) : Promise<UpdateResult | null> {
+    return await this.clientsService.update(govId, dto);
   }
 
-  @Delete(':uuid')
-  async remove(@Param('uuid') uuid: string): Promise<DeleteResult | void> {
-    return await this.clientsService.remove(uuid);
+  @Delete(':govId')
+  async remove(@Param('govId') govId: string): Promise<DeleteResult | void> {
+    return await this.clientsService.remove(govId);
   }
 }

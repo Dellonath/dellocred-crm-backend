@@ -14,8 +14,10 @@ services:
       - dellocred-net
 
   dellocred-backend:
+    build:
+      dockerfile: Dockerfile
     image: dellocred-crm-backend:latest
-    container_name: dellocred_crm_backend
+    container_name: dellocred_crm_backend      
     env_file: .env
     ports:
       - "3000:3000"

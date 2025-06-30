@@ -15,7 +15,7 @@ import {
   state,
   utmMedium,
   utmSource
-} from './enums/clients.entity.enums';
+} from './clients.entity.enums';
 
 @Entity({ name: 'clients' })
 export class Client {
@@ -23,7 +23,7 @@ export class Client {
   @PrimaryGeneratedColumn('uuid')
   uuid: string;
 
-  @Column({ name: 'gov_id', type: 'varchar', length: 11, unique: true, nullable: false, })
+  @Column({ name: 'gov_id', type: 'varchar', length: 11, unique: true, nullable: false })
   govId: string;
 
   @Column({ name: 'first_name', type: 'varchar', length: 64, nullable: false })
@@ -59,7 +59,7 @@ export class Client {
   @Column({ name: 'client_sector', type: 'enum', enum: clientSector, nullable: true })
   clientSector: clientSector;
 
-  @Column({ name: 'country', type: 'varchar', length: 64, default: 'BRAZIL' })
+  @Column({ name: 'country', type: 'varchar', length: 64, default: 'brazil' })
   country: string;
 
   @Column({ name: 'state', type: 'enum', enum: state, nullable: true })

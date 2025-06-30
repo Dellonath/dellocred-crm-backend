@@ -8,6 +8,7 @@ import {
   IsString,
   IsUUID,
   Length,
+  Matches
 } from 'class-validator';
 import {
   clientSector,
@@ -18,7 +19,7 @@ import {
   state,
   utmMedium,
   utmSource,
-} from '../entities/enums/clients.entity.enums';
+} from '../entities/clients.entity.enums';
 
 export class CreateClientDto {
   @IsOptional()
@@ -42,7 +43,8 @@ export class CreateClientDto {
   email: string;
 
   @IsString()
-  @Length(1, 64)
+  @Matches(/^\+?\d{10,15}$/)
+  @Length(1, 20)
   phoneNumber: string;
 
   @IsOptional()

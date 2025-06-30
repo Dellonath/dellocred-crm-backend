@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { DeleteResult, UpdateResult, FindOptionsWhere } from 'typeorm';
-import { UsersService } from './users.service';
-import { User } from './users.entity';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { DeleteResult, FindOptionsWhere, UpdateResult } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/users.entity';
+import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
