@@ -1,8 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { ClientsService } from './clients.service';
-import { CreateClientDto } from './dto/create-client.dto';
-import { UpdateClientDto } from './dto/update-client.dto';
+import { CreateClientDto, UpdateClientDto } from './dto/client.dto';
 import { Client } from './entities/clients.entity';
 
 @Controller('clients')

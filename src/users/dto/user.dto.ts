@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/mapped-types';
 import {
   IsBoolean,
   IsDateString,
@@ -8,20 +9,17 @@ import {
   IsString,
   IsUUID,
   Length,
-  Matches
 } from 'class-validator';
 import {
   channelType,
-  clientSector,
   educationLevel,
   gender,
+  jobPosition,
   maritialStatus,
-  state,
-  utmMedium,
-  utmSource
+  state
 } from '../../enums/index';
 
-export class CreateClientDto {
+export class CreateUserDto {
 
   @IsOptional()
   @IsUUID()
@@ -44,13 +42,14 @@ export class CreateClientDto {
   email: string;
 
   @IsString()
-  @Matches(/^\+?\d{10,15}$/)
-  @Length(1, 20)
+  @Length(1, 64)
   phoneNumber: string;
 
-  @IsOptional()
+  @IsEnum(jobPosition)
+  jobPosition: jobPosition;
+
   @IsEnum(channelType)
-  channelType?: channelType;
+  channelType: channelType;
 
   @IsOptional()
   @IsDateString()
@@ -61,25 +60,12 @@ export class CreateClientDto {
   gender?: gender;
 
   @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  occupation?: string;
-
-  @IsOptional()
   @IsEnum(maritialStatus)
   maritialStatus?: maritialStatus;
 
   @IsOptional()
   @IsEnum(educationLevel)
   educationLevel?: educationLevel;
-
-  @IsOptional()
-  @IsNumber()
-  wage?: number;
-
-  @IsOptional()
-  @IsEnum(clientSector)
-  clientSector?: clientSector;
 
   @IsOptional()
   @IsString()
@@ -111,30 +97,17 @@ export class CreateClientDto {
 
   @IsOptional()
   @IsString()
+  @Length(1, 64)
   addressComplement?: string;
 
   @IsOptional()
   @IsString()
+  @Length(1, 20)
   postalCode?: string;
 
   @IsOptional()
-  @IsEnum(utmSource)
-  utmSource?: utmSource;
-
-  @IsOptional()
-  @IsEnum(utmMedium)
-  utmMedium?: utmMedium;
-
-  @IsOptional()
-  @IsString()
-  utmCampaign?: string;
-
-  @IsOptional()
-  @IsString()
-  createdByUserUuid?: string;
-  
-  @IsOptional()
   @IsBoolean()
   isActive?: boolean;
-
 }
+
+export class UpdateUserDto extends PartialType(CreateUserDto) {}

@@ -1,10 +1,10 @@
+import { PartialType } from '@nestjs/mapped-types';
 import {
   IsOptional,
   IsString,
   IsUUID,
   Length
 } from 'class-validator';
-
 
 export class CreateClientNoteDto {
 
@@ -26,3 +26,5 @@ export class CreateClientNoteDto {
   note: string;
 
 }
+
+export class UpdateClientNotesDto extends PartialType(CreateClientNoteDto) {}

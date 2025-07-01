@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { CreateMarketingDto } from './dto/create-marketing.campaigns.dto';
-import { UpdateMarketingDto } from './dto/update-marketing.campaigns.dto';
+import { CreateMarketingDto, UpdateMarketingDto } from './dto/marketing-campaign.dto';
 import { MarketingService } from './marketing.service';
 
 @Controller('marketing')

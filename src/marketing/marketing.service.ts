@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateMarketingDto } from './dto/create-marketing.campaigns.dto';
-import { UpdateMarketingDto } from './dto/update-marketing.campaigns.dto';
+import { CreateMarketingDto, UpdateMarketingDto } from './dto/marketing-campaign.dto';
 import { MarketingCampaign } from './entities/marketing-campaigns.entity';
 
 @Injectable()
