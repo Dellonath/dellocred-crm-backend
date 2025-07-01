@@ -16,8 +16,8 @@ export class ClientsController {
   }
 
   @Post('form')
-  createFromForm(@Body() dto: CreateClientDto): Promise<Client> {
-    return this.clientsService.createFromForm(dto);
+  createByForm(@Body() dto: CreateClientDto): Promise<Client> {
+    return this.clientsService.createByForm(dto);
   }
 
   @Post('batch')

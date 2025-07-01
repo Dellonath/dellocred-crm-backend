@@ -5,32 +5,56 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { CampaignChannel, CampaignStatus } from './marketing-campaigns.enums';
+import { campaignStatus, channelType } from '../../enums/index';
 
 @Entity({ name: 'marketing_campaigns' })
 export class MarketingCampaign {
 
-  @PrimaryGeneratedColumn('uuid', { name: 'uuid' }) 
+  @PrimaryGeneratedColumn('uuid') 
   uuid: string;
 
-  @Column({ name: 'campaign_name', type: 'varchar', length: 150, nullable: false })
+  @Column({
+    name: 'campaign_name',
+    type: 'varchar',
+    length: 150,
+    nullable: false,
+    comment: 'Name of the marketing campaign'
+  })
   campaignName: string;
 
-  @Column({ name: 'utm_campaign', type: 'varchar', length: 100, unique: true, nullable: false })
+  @Column({
+    name: 'utm_campaign',
+    type: 'varchar',
+    length: 100,
+    unique: true,
+    nullable: false,
+    comment: 'UTM campaign identifier, unique'
+  })
   utmCampaign: string;
 
   @Column({
-    name: 'channel',
+    name: 'campaign_channel',
     type: 'enum',
-    enum: CampaignChannel,
+    enum: channelType,
     nullable: false,
+    comment: 'Channel where the campaign is run (e.g., online, offline or both)'
   })
-  channel: CampaignChannel;
+  campaignChannel: channelType;
 
-  @Column({ name: 'start_date', type: 'datetime', nullable: false })
+  @Column({
+    name: 'start_date',
+    type: 'datetime',
+    nullable: false,
+    comment: 'Start date of the campaign'
+  })
   startDate: Date;
 
-  @Column({ name: 'end_date', type: 'datetime', nullable: false })
+  @Column({
+    name: 'end_date',
+    type: 'datetime',
+    nullable: false,
+    comment: 'End date of the campaign'
+  })
   endDate: Date;
 
   @Column({
@@ -39,26 +63,49 @@ export class MarketingCampaign {
     precision: 12,
     scale: 2,
     default: '0.00',
+    nullable: false,
+    comment: 'Budget allocated for the campaign in BRL'
   })
   budget: number;
 
-  @Column({ name: 'objective', type: 'varchar', length: 100, nullable: false })
+  @Column({
+    name: 'objective',
+    type: 'varchar',
+    length: 100,
+    nullable: false,
+    comment: 'Objective or goal of the campaign'
+  })
   objective: string;
 
   @Column({
-    name: 'status',
+    name: 'campaign_status',
     type: 'enum',
-    enum: CampaignStatus,
-    default: CampaignStatus.DRAFT,
+    enum: campaignStatus,
+    default: campaignStatus.DRAFT,
+    comment: 'Current status of the campaign (e.g., draft, active, completed)'
   })
-  status: CampaignStatus;
+  campaignStatus: campaignStatus;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @Column({
+    name: 'notes',
+    type: 'text',
+    nullable: true,
+    comment: 'Additional notes or comments about the campaign'
+  })
+  notes: string;
+
+  @CreateDateColumn({
+    name: 'created_at',
+    type: 'timestamp',
+    comment: 'Timestamp when the campaign was created'
+  })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  @UpdateDateColumn({
+    name: 'updated_at',
+    type: 'timestamp',
+    comment: 'Timestamp when the campaign was last updated'
+  })
   updatedAt: Date;
 
-  @Column({ name: 'notes', type: 'text', nullable: true })
-  notes: string;
 }

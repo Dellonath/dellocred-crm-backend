@@ -1,10 +1,10 @@
 import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { channelType, utmSource } from '../enums/index';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/clients.entity';
-import { AcquisitionChannelType, utmSource } from './entities/clients.entity.enums';
 
 @Injectable()
 export class ClientsService {
@@ -19,9 +19,9 @@ export class ClientsService {
     }
   }
 
-  createFromForm(dto: CreateClientDto): Promise<Client | null> {
+  createByForm(dto: CreateClientDto): Promise<Client | null> {
 
-    dto.AcquisitionChannelType = AcquisitionChannelType.ONLINE
+    dto.channelType = channelType.ONLINE
     dto.utmSource = utmSource.WEBSITE
 
     try {

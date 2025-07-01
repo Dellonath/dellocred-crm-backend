@@ -11,17 +11,18 @@ import {
   Matches
 } from 'class-validator';
 import {
-  AcquisitionChannelType,
+  channelType,
   clientSector,
   educationLevel,
   gender,
   maritialStatus,
   state,
   utmMedium,
-  utmSource,
-} from '../entities/clients.entity.enums';
+  utmSource
+} from '../../enums/index';
 
 export class CreateClientDto {
+
   @IsOptional()
   @IsUUID()
   uuid?: string;
@@ -48,8 +49,8 @@ export class CreateClientDto {
   phoneNumber: string;
 
   @IsOptional()
-  @IsEnum(AcquisitionChannelType)
-  AcquisitionChannelType?: AcquisitionChannelType;
+  @IsEnum(channelType)
+  channelType?: channelType;
 
   @IsOptional()
   @IsDateString()
@@ -97,6 +98,11 @@ export class CreateClientDto {
   @IsOptional()
   @IsString()
   @Length(1, 64)
+  addressNeighborhood?: string;
+
+  @IsOptional()
+  @IsString()
+  @Length(1, 64)
   addressStreet?: string;
 
   @IsOptional()
@@ -124,6 +130,11 @@ export class CreateClientDto {
   utmCampaign?: string;
 
   @IsOptional()
+  @IsString()
+  createdByUserUuid?: string;
+  
+  @IsOptional()
   @IsBoolean()
   isActive?: boolean;
+
 }

@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { ClientsModule } from './clients/clients.module';
 import { MarketingModule } from './marketing/marketing.module';
 import { UsersModule } from './users/users.module';
+import { LoansModule } from './loans/loans.module';
 
 
 @Module({
@@ -23,7 +24,7 @@ import { UsersModule } from './users/users.module';
     }),
     UsersModule, 
     ClientsModule, 
-    MarketingModule
+    MarketingModule, LoansModule
   ],
   controllers: [AppController],
   providers: [AppService],
