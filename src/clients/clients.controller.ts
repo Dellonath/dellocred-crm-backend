@@ -15,6 +15,11 @@ export class ClientsController {
     return this.clientsService.create(dto);
   }
 
+  @Post('form')
+  createFromForm(@Body() dto: CreateClientDto): Promise<Client> {
+    return this.clientsService.createFromForm(dto);
+  }
+
   @Post('batch')
   @HttpCode(207)
   async createByBatch(@Body() dto: CreateClientDto[]): Promise<{ statusCode?: HttpStatus, error?: string }[]> {

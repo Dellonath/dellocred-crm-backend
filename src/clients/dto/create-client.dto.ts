@@ -11,11 +11,11 @@ import {
   Matches
 } from 'class-validator';
 import {
+  AcquisitionChannelType,
   clientSector,
   educationLevel,
   gender,
   maritialStatus,
-  originChannel,
   state,
   utmMedium,
   utmSource,
@@ -46,6 +46,10 @@ export class CreateClientDto {
   @Matches(/^\+?\d{10,15}$/)
   @Length(1, 20)
   phoneNumber: string;
+
+  @IsOptional()
+  @IsEnum(AcquisitionChannelType)
+  AcquisitionChannelType?: AcquisitionChannelType;
 
   @IsOptional()
   @IsDateString()
@@ -106,10 +110,6 @@ export class CreateClientDto {
   @IsOptional()
   @IsString()
   postalCode?: string;
-
-  @IsOptional()
-  @IsEnum(originChannel)
-  originChannel?: originChannel;
 
   @IsOptional()
   @IsEnum(utmSource)

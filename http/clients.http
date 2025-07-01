@@ -1,15 +1,29 @@
 ### list all clients
-GET http://localhost:3000/clients/12345678901
+GET http://localhost:3000/clients
 
 ### list active clients
 GET http://localhost:3000/clients/actives
 
 ### add client
-POST http://localhost:3000/clients/
+POST http://localhost:3000/clients
 Content-Type: application/json
 
 {
-  "govId": "34522190213",
+  "govId": "34522190313",
+  "firstName": "Carla",
+  "lastName": "Oliveira",
+  "email": "carla.oliveira@example.com",
+  "phoneNumber": "+5511777777777",
+  "birthDate": "1995-09-20",
+  "gender": "f"
+}
+
+### add form client
+POST http://localhost:3000/clients/form
+Content-Type: application/json
+
+{
+  "govId": "34522190313",
   "firstName": "Carla",
   "lastName": "Oliveira",
   "email": "carla.oliveira@example.com",
@@ -114,4 +128,4 @@ Content-Type: application/json
 
 
 ### post batch clients
-DELETE http://localhost:3000/clients/12345678901 
+DELETE http://localhost:3000/clients/34522190313 

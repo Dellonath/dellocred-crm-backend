@@ -4,6 +4,7 @@ import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { CreateClientDto } from './dto/create-client.dto';
 import { UpdateClientDto } from './dto/update-client.dto';
 import { Client } from './entities/clients.entity';
+import { AcquisitionChannelType, utmSource } from './entities/clients.entity.enums';
 
 @Injectable()
 export class ClientsService {
@@ -13,6 +14,18 @@ export class ClientsService {
   create(dto: CreateClientDto): Promise<Client | null> {
     try {
       return this.repository.save(dto)
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
+  }
+
+  createFromForm(dto: CreateClientDto): Promise<Client | null> {
+
+    dto.AcquisitionChannelType = AcquisitionChannelType.ONLINE
+    dto.utmSource = utmSource.WEBSITE
+
+    try {
+      return this.create(dto)
     } catch (error) {
       throw new BadRequestException(error.message);
     }

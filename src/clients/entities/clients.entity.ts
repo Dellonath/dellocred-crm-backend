@@ -7,11 +7,11 @@ import {
 } from 'typeorm';
 
 import {
+  AcquisitionChannelType,
   clientSector,
   educationLevel,
   gender,
   maritialStatus,
-  originChannel,
   state,
   utmMedium,
   utmSource
@@ -37,6 +37,9 @@ export class Client {
 
   @Column({ name: 'phone_number', type: 'varchar', length: 64, unique: true, nullable: false })
   phoneNumber: string;
+
+  @Column({ name: 'acquisition_channel_type', type: 'enum', enum: AcquisitionChannelType, nullable: false })
+  AcquisitionChannelType: AcquisitionChannelType;
 
   @Column({ name: 'birth_date', type: 'date', nullable: true })
   birthDate: Date;
@@ -79,9 +82,6 @@ export class Client {
 
   @Column({ name: 'postal_code', type: 'varchar', length: 20, nullable: true })
   postalCode: string;
-
-  @Column({ name: 'origin_channel', type: 'enum', enum: originChannel, nullable: true })
-  originChannel: originChannel;
 
   @Column({ name: 'utm_source', type: 'enum', enum: utmSource, nullable: true })
   utmSource: utmSource;

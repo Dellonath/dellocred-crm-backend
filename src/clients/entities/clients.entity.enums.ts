@@ -12,8 +12,8 @@ export enum state {
   PR = 'pr', RS = 'rs', SC = 'sc'
 }
 
+// Indicate if the client works in the public or private sector
 export enum clientSector {
-  // Indicate if the client works in the public or private sector
   PRIVATE = 'private',
   PUBLIC = 'public'
 }
@@ -39,15 +39,15 @@ export enum educationLevel {
   DOCTORATE = 'doctorate'
 }
 
-export enum originChannel {
-  WEBSITE = 'website',
-  SOCIAL_MEDIA = 'social_media',
-  IMPORTED = 'imported',
-  REFERRAL = 'referral',
-  OTHER = 'other'
+// Indicate if the client came from either online or offline channel
+export enum AcquisitionChannelType {
+  ONLINE = 'online',
+  OFFLINE = 'offline'
 }
 
 export enum utmSource {
+  WEBSITE = 'website',
+  IMPORTED = 'imported',
   GOOGLE = 'google',
   FACEBOOK = 'facebook',
   INSTAGRAM = 'instagram',
@@ -64,15 +64,15 @@ export enum utmSource {
 }
 
 export enum utmMedium {
-  CPC = 'cpc',                 // custo por clique (ads)
-  PAID_SOCIAL = 'paid_social', // anúncios em redes sociais
-  EMAIL = 'email',             // disparos de e-mail marketing
-  SOCIAL = 'social',           // tráfego social orgânico
-  ORGANIC = 'organic',         // busca orgânica
-  REFERRAL = 'referral',       // link externo de outro site
-  DIRECT = 'direct',           // acesso direto (sem origem)
-  display = 'display',         // banners e mídia display
-  INFLUENCER = 'influencer',   // parceria ou menção
-  PUSH = 'push',               // notificações push
+  CPC = 'cpc',                 // cost per click (ads)
+  PAID_SOCIAL = 'paid_social', // social media ads
+  EMAIL = 'email',             // email marketing campaigns
+  SOCIAL = 'social',           // organic social traffic
+  ORGANIC = 'organic',         // organic search
+  REFERRAL = 'referral',       // external link from another site
+  DIRECT = 'direct',           // direct access (no source)
+  display = 'display',         // banners and display media
+  INFLUENCER = 'influencer',   // partnership or mention
+  PUSH = 'push',               // push notifications
   OTHER = 'other'
 }
