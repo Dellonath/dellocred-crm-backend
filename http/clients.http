@@ -12,6 +12,7 @@ POST http://localhost:3000/clients
 Content-Type: application/json
 
 {
+  "uuid": "aeac44ee-6371-4b30-858f-a7855ae0036f",
   "govId": "34522190313",
   "firstName": "Carla",
   "lastName": "Oliveira",
@@ -26,7 +27,6 @@ POST http://localhost:3000/clients/form
 Content-Type: application/json
 
 {
-  "govId": "34522190313",
   "firstName": "Carla",
   "lastName": "Oliveira",
   "email": "carla.oliveira@example.com",
@@ -42,6 +42,7 @@ Content-Type: application/json
 
 [
   {
+    "uuid": "aeac44ee-6371-4b30-858f-a7855ae0036f",
     "govId": "12345678901",
     "firstName": "Alice",
     "lastName": "Silva",
@@ -117,18 +118,45 @@ Content-Type: application/json
     "utmSource": "linkedin",
     "utmMedium": "social",
     "utmCampaign": "winter-promo",
-    "isActive": false
+    "isActive": true
   }
 ]
 
 ### path=ch
-PATCH  http://localhost:3000/clients/34567890123
+PATCH  http://localhost:3000/clients/23456789012
 Content-Type: application/json
 
 {
-  "birthDate": "1990-01-01"
+"addressComplement": "Casa",
+"addressNeighborhood": "asdasdasd",
+"addressNumber": 200,
+"addressStreet": "Rua das Laranjeiras",
+"birthDate": "1985-05-15",
+"channelType": "online",
+"city": "Rio de Janeiro",
+"clientSector": "public",
+"country": "Brazil",
+"createdAt": "2025-07-03T22:15:53.199Z",
+"educationLevel": "master",
+"email": "bruno.souza@example.com",
+"firstName": "Bruno",
+"gender": "f",
+"govId": "23456789012",
+"isActive": true,
+"lastName": "Souza",
+"maritialStatus": "married",
+"occupation": "Designer",
+"phoneNumber": "+5511888888888",
+"postalCode": "22240003",
+"state": "sp",
+"updatedAt": "2025-07-04T01:16:33.000Z",
+"utmCampaign": "autumn-campaign",
+"utmMedium": "email",
+"utmSource": "instagram",
+"uuid": "759e5458-55f8-49f7-b291-e7e6f0868132",
+"wage": 4000.00
 }
 
 
 ### post batch clients
-DELETE http://localhost:3000/clients/34522190313 
+DELETE http://localhost:3000/clients/34567890123 

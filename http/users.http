@@ -1,0 +1,45 @@
+### list all users
+GET http://localhost:3000/users
+
+### get user
+GET http://localhost:3000/users/49590b01-81b3-49bc-9a16-0f4d368a95d5
+
+### add user
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+  "uuid": "49590b01-81b3-49bc-9a16-0f4d368a95d5",
+  "govId": "12345678901",
+  "firstName": "Maria",
+  "lastName": "Silva",
+  "email": "maria.silva@example.com",
+  "phoneNumber": "+5511999999999",
+  "jobPosition": "manager",
+  "channelType": "online",
+  "birthDate": "1990-05-20",
+  "gender": "f",
+  "maritialStatus": "single",
+  "educationLevel": "bachelor",
+  "country": "brazil",
+  "state": "sp",
+  "city": "São Paulo",
+  "addressNeighborhood": "Centro",
+  "addressStreet": "Rua das Flores",
+  "addressNumber": 123,
+  "addressComplement": "Apt 45",
+  "postalCode": "01000-000",
+  "isActive": true
+}
+
+### update users
+PATCH  http://localhost:3000/users/34567890123
+Content-Type: application/json
+
+{
+  "birthDate": "1990-01-01"
+}
+
+
+### post batch users
+DELETE http://localhost:3000/users/49590b01-81b3-49bc-9a16-0f4d368a95d5 

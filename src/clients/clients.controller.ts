@@ -2,7 +2,9 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { ClientsService } from './clients.service';
 import { CreateClientDto, UpdateClientDto } from './dto/client.dto';
+import { CreateClientNoteDto } from './dto/client.note.dto';
 import { Client } from './entities/clients.entity';
+import { ClientNote } from './entities/clients.notes.entity';
 
 @Controller('clients')
 export class ClientsController {
@@ -12,6 +14,21 @@ export class ClientsController {
   @Post()
   create(@Body() dto: CreateClientDto): Promise<Client> {
     return this.clientsService.create(dto);
+  }
+
+  @Post('notes')
+  createClientNote(@Body() dto: CreateClientNoteDto): Promise<ClientNote> {
+    return this.clientsService.createClientNote(dto);
+  }
+
+  @Get('notes')
+  async findAllClientsNotes(): Promise<ClientNote[]> {
+    return await this.clientsService.findAllClientsNotes();
+  }
+
+  @Get('notes/:clientUuid')
+  async findAllClientNotes(@Param('clientUuid') clientUuid: string): Promise<ClientNote[]> {
+    return await this.clientsService.findAllClientNotes(clientUuid);
   }
 
   @Post('form')

@@ -18,13 +18,10 @@ export class CreateClientNoteDto {
   @IsUUID()
   userUuid: string;
 
-  @IsUUID()
-  createdByUserUuid: string;
-
   @IsString()
   @Length(1, 64)
   note: string;
 
 }
 
-export class UpdateClientNotesDto extends PartialType(CreateClientNoteDto) {}
+export class UpdateClientNoteDto extends PartialType(CreateClientNoteDto) {}

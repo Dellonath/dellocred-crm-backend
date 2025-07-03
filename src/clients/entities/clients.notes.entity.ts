@@ -4,27 +4,28 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
 import { Client } from './clients.entity';
 
+
 @Entity({ name: 'clients_notes' })
-export class ClientNotes {
+export class ClientNote {
 
   @PrimaryGeneratedColumn('uuid')
   // Unique identifier for the note
   uuid: string;
 
   @ManyToOne(() => Client, { nullable: false })
-  @JoinColumn({ name: 'client_uuid' })
+  @JoinColumn({ name: 'client_uuid', referencedColumnName: 'uuid' })
   // Reference to the related client
   clientUuid: Client;
 
-  @OneToOne(() => User, { nullable: false })
-  @JoinColumn({ name: 'user_uuid' })
+  @ManyToMany(() => User, { nullable: false })
+  @JoinColumn({ name: 'user_uuid', referencedColumnName: 'uuid' })
   // Reference to the user who created the note
   userUuid: User;
 
