@@ -36,7 +36,7 @@ export class ClientsController {
   }
 
   @Get(':govId')
-  async findOneByGovId(@Param('govId') govId: string): Promise<Client | null> {
+  async findOneByGovId(@Param('govId') govId: string): Promise<Client> {
     return await this.clientsService.findOneByGovId(govId);
   }
 

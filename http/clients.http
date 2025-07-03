@@ -1,6 +1,9 @@
 ### list all clients
 GET http://localhost:3000/clients
 
+### get client
+GET http://localhost:3000/clients/13208992696
+
 ### list active clients
 GET http://localhost:3000/clients/actives
 
@@ -45,7 +48,7 @@ Content-Type: application/json
     "email": "alice.silva@example.com",
     "phoneNumber": "+5511999999999",
     "birthDate": "1990-01-01",
-    "gender": "s",
+    "gender": "f",
     "occupation": "Engineer",
     "maritialStatus": "single",
     "educationLevel": "bachelor",

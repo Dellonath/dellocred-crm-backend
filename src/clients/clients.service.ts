@@ -1,4 +1,4 @@
-import { BadRequestException, HttpStatus, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 import { channelType, utmSource } from '../enums/index';
@@ -10,9 +10,9 @@ export class ClientsService {
 
   constructor(@InjectRepository(Client) private repository: Repository<Client>) {}
 
-  create(dto: CreateClientDto): Promise<Client | null> {
+  async create(dto: CreateClientDto): Promise<Client> {
     try {
-      return this.repository.save(dto)
+      return await this.repository.save(dto);
     } catch (error) {
       throw new BadRequestException(error.message);
     }
@@ -49,15 +49,19 @@ export class ClientsService {
 
   async findAllActives(): Promise<Client[]> {
     return await this.repository.find({
-      where: { isActive: true },
+      where: { isActive: true }
     });
   }
 
-  async findOneByGovId(govId: string): Promise<Client | null> {
-    return await this.repository.findOne({ 
-      where: { govId }
-    });
+  async findOneByGovId(govId: string): Promise<Client> {
+  const client = await this.repository.findOne({
+    where: { govId } 
+  });
+  if (!client) {
+    throw new NotFoundException(`Client with govId ${govId} not found`);
   }
+  return client;
+}
   
   async update(govId: string, dto: UpdateClientDto): Promise<UpdateResult | null> {
     return await this.repository.update({ govId }, dto);
