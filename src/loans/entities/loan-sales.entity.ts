@@ -1,5 +1,4 @@
 import { Client } from 'src/clients/entities/clients.entity';
-import { loanSaleStatus, loanType } from 'src/enums';
 import { User } from 'src/users/entities/users.entity';
 import {
   Column,
@@ -10,6 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { loanSaleStatus, loanType } from '../../clients/campaign-channel.enum';
 
 @Entity({ name: 'loan_sales' })
 export class LoanSale {
