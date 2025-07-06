@@ -34,7 +34,7 @@ export class ClientNote {
     type: 'varchar',
     length: 256,
     nullable: false,
-    comment: 'Content of the note, used in follow-up'
+    comment: 'Content of the note used for follow-up'
   })
   note: string;
 

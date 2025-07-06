@@ -1,16 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
-import {
-  IsBoolean,
-  IsDateString,
-  IsEmail,
-  IsEnum,
-  IsNumber,
-  IsOptional,
-  IsString,
-  IsUUID,
-  Length,
-  Matches
-} from 'class-validator';
+import { z } from 'zod';
 import {
   channelType,
   clientSector,
@@ -22,122 +10,36 @@ import {
   utmSource
 } from '../../enums/index';
 
-export class CreateClientDto {
+export const CreateClientSchema = z.object({
+  uuid: z.string().uuid().optional(),
+  govId: z.string().length(11),
+  firstName: z.string().min(1).max(64),
+  lastName: z.string().min(1).max(64),
+  email: z.string().email().max(64),
+  phoneNumber: z.string().regex(/^\+?\d{10,15}$/).min(1).max(20),
+  channelType: z.nativeEnum(channelType).optional(),
+  birthDate: z.coerce.date().optional(),
+  gender: z.nativeEnum(gender).optional(),
+  occupation: z.string().min(1).max(64).optional(),
+  maritialStatus: z.nativeEnum(maritialStatus).optional(),
+  educationLevel: z.nativeEnum(educationLevel).optional(),
+  wage: z.number().optional(),
+  clientSector: z.nativeEnum(clientSector).optional(),
+  country: z.string().min(1).max(64).optional(),
+  state: z.nativeEnum(state).optional(),
+  city: z.string().min(1).max(64).optional(),
+  addressNeighborhood: z.string().min(1).max(64).optional(),
+  addressStreet: z.string().min(1).max(64).optional(),
+  addressNumber: z.number().optional(),
+  addressComplement: z.string().optional(),
+  postalCode: z.string().optional(),
+  utmSource: z.nativeEnum(utmSource).optional(),
+  utmMedium: z.nativeEnum(utmMedium).optional(),
+  utmCampaign: z.string().optional(),
+  createdByUserUuid: z.string().optional(),
+  isActive: z.boolean().optional(),
+});
 
-  @IsOptional()
-  @IsUUID()
-  uuid?: string;
-
-  @IsString()
-  @Length(11, 11)
-  govId: string;
-
-  @IsString()
-  @Length(1, 64)
-  firstName: string;
-
-  @IsString()
-  @Length(1, 64)
-  lastName: string;
-
-  @IsEmail()
-  @Length(1, 64)
-  email: string;
-
-  @IsString()
-  @Matches(/^\+?\d{10,15}$/)
-  @Length(1, 20)
-  phoneNumber: string;
-
-  @IsOptional()
-  @IsEnum(channelType)
-  channelType?: channelType;
-
-  @IsOptional()
-  @IsDateString()
-  birthDate?: Date;
-
-  @IsOptional()
-  @IsEnum(gender)
-  gender?: gender;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  occupation?: string;
-
-  @IsOptional()
-  @IsEnum(maritialStatus)
-  maritialStatus?: maritialStatus;
-
-  @IsOptional()
-  @IsEnum(educationLevel)
-  educationLevel?: educationLevel;
-
-  @IsOptional()
-  @IsNumber()
-  wage?: number;
-
-  @IsOptional()
-  @IsEnum(clientSector)
-  clientSector?: clientSector;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  country?: string;
-
-  @IsOptional()
-  @IsEnum(state)
-  state?: state;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  city?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  addressNeighborhood?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  addressStreet?: string;
-
-  @IsOptional()
-  @IsNumber()
-  addressNumber?: number;
-
-  @IsOptional()
-  @IsString()
-  addressComplement?: string;
-
-  @IsOptional()
-  @IsString()
-  postalCode?: string;
-
-  @IsOptional()
-  @IsEnum(utmSource)
-  utmSource?: utmSource;
-
-  @IsOptional()
-  @IsEnum(utmMedium)
-  utmMedium?: utmMedium;
-
-  @IsOptional()
-  @IsString()
-  utmCampaign?: string;
-
-  @IsOptional()
-  @IsString()
-  createdByUserUuid?: string;
-  
-  @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
-
-}
-
-export class UpdateClientDto extends PartialType(CreateClientDto) {}
+export type CreateClientDto = z.infer<typeof CreateClientSchema>;
+export const UpdateClientSchema = CreateClientSchema.partial();
+export type UpdateClientDto = z.infer<typeof UpdateClientSchema>;

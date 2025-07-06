@@ -1,27 +1,13 @@
-import { PartialType } from '@nestjs/mapped-types';
-import {
-  IsOptional,
-  IsString,
-  IsUUID,
-  Length
-} from 'class-validator';
+import { z } from 'zod';
 
-export class CreateClientNoteDto {
+export const CreateClientNoteSchema = z.object({
+  uuid: z.string().uuid().optional(),
+  clientUuid: z.string().uuid(),
+  userUuid: z.string().uuid(),
+  note: z.string().min(1).max(64),
+});
 
-  @IsOptional()
-  @IsUUID()
-  uuid?: string;
+export type CreateClientNoteDto = z.infer<typeof CreateClientNoteSchema>;
 
-  @IsUUID()
-  clientUuid: string;
-
-  @IsUUID()
-  userUuid: string;
-
-  @IsString()
-  @Length(1, 64)
-  note: string;
-
-}
-
-export class UpdateClientNoteDto extends PartialType(CreateClientNoteDto) {}
+export const UpdateClientNoteSchema = CreateClientNoteSchema.partial();
+export type UpdateClientNoteDto = z.infer<typeof UpdateClientNoteSchema>;

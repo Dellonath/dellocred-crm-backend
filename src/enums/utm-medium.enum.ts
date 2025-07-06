@@ -6,7 +6,7 @@ export enum utmMedium {
   ORGANIC = 'organic',         // organic search
   REFERRAL = 'referral',       // external link from another site
   DIRECT = 'direct',           // direct access (no source)
-  display = 'display',         // banners and display media
+  DISPLAY = 'display',         // banners and display media
   INFLUENCER = 'influencer',   // partnership or mention
   PUSH = 'push',               // push notifications
   OTHER = 'other'
