@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post
 import { ZodValidationPipe } from 'src/zod-validation.pipe';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { ClientsService } from './clients.service';
-import { CreateClientDto, CreateClientSchema, UpdateClientDto } from './dto/client.dto';
+import { CreateClientDto, CreateClientSchema, UpdateClientDto, UpdateClientSchema } from './dto/client.dto';
 import { CreateClientNoteDto, CreateClientNoteSchema } from './dto/client.note.dto';
 import { Client } from './entities/clients.entity';
 import { ClientNote } from './entities/clients.notes.entity';
@@ -46,6 +46,7 @@ export class ClientsController {
   }
 
   @Patch(':govId')
+  @UsePipes(new ZodValidationPipe(UpdateClientSchema))
   async update(@Param('govId') govId: string, @Body() dto: UpdateClientDto) : Promise<UpdateResult | null> {
     return await this.clientsService.update(govId, dto);
   }
