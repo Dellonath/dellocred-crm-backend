@@ -16,12 +16,12 @@ export class UsersService {
     return this.usersRepository.save(user);
   }
 
-  findAll(): Promise<User[]> {
-    return this.usersRepository.find();
+  async findAll(): Promise<User[]> {
+    return await this.usersRepository.find();
   }
 
-  findOne(uuid: FindOptionsWhere<User>): Promise<User | null> {
-  return this.usersRepository.findOneBy(uuid);
+  async findOne(uuid: FindOptionsWhere<User>): Promise<User | null> {
+  return await this.usersRepository.findOneBy(uuid);
 }
   
   update(uuid: string, user: UpdateUserDto): Promise<UpdateResult | null> {

@@ -1,15 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
-import {
-  IsBoolean,
-  IsDateString,
-  IsEmail,
-  IsEnum,
-  IsNumber,
-  IsOptional,
-  IsString,
-  IsUUID,
-  Length,
-} from 'class-validator';
+import { z } from 'zod';
 import {
   channelType,
   educationLevel,
@@ -19,95 +8,30 @@ import {
   state
 } from '../../enums/index';
 
-export class CreateUserDto {
+export const CreateUserSchema = z.object({
+  uuid: z.string().uuid().optional(),
+  govId: z.string().length(11),
+  firstName: z.string().min(1).max(64),
+  lastName: z.string().min(1).max(64),
+  email: z.string().email().max(64),
+  phoneNumber: z.string().min(1).max(64),
+  jobPosition: z.nativeEnum(jobPosition),
+  channelType: z.nativeEnum(channelType),
+  birthDate: z.coerce.date().optional(),
+  gender: z.nativeEnum(gender).optional(),
+  maritialStatus: z.nativeEnum(maritialStatus).optional(),
+  educationLevel: z.nativeEnum(educationLevel).optional(),
+  country: z.string().optional(),
+  state: z.nativeEnum(state).optional(),
+  city: z.string().optional(),
+  addressNeighborhood: z.string().optional(),
+  addressStreet: z.string().optional(),
+  addressNumber: z.number().optional(),
+  addressComplement: z.string().optional(),
+  postalCode: z.string().min(1).max(20).optional(),
+  isActive: z.boolean().optional(),
+});
 
-  @IsOptional()
-  @IsUUID()
-  uuid?: string;
-
-  @IsString()
-  @Length(11, 11)
-  govId: string;
-
-  @IsString()
-  @Length(1, 64)
-  firstName: string;
-
-  @IsString()
-  @Length(1, 64)
-  lastName: string;
-
-  @IsEmail()
-  @Length(1, 64)
-  email: string;
-
-  @IsString()
-  @Length(1, 64)
-  phoneNumber: string;
-
-  @IsEnum(jobPosition)
-  jobPosition: jobPosition;
-
-  @IsEnum(channelType)
-  channelType: channelType;
-
-  @IsOptional()
-  @IsDateString()
-  birthDate?: Date;
-
-  @IsOptional()
-  @IsEnum(gender)
-  gender?: gender;
-
-  @IsOptional()
-  @IsEnum(maritialStatus)
-  maritialStatus?: maritialStatus;
-
-  @IsOptional()
-  @IsEnum(educationLevel)
-  educationLevel?: educationLevel;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  country?: string;
-
-  @IsOptional()
-  @IsEnum(state)
-  state?: state;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  city?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  addressNeighborhood?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  addressStreet?: string;
-
-  @IsOptional()
-  @IsNumber()
-  addressNumber?: number;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 64)
-  addressComplement?: string;
-
-  @IsOptional()
-  @IsString()
-  @Length(1, 20)
-  postalCode?: string;
-
-  @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
-}
-
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
+export type CreateUserDto = z.infer<typeof CreateUserSchema>;
+export const UpdateUserSchema = CreateUserSchema.partial();
+export type UpdateUserDto = z.infer<typeof UpdateUserSchema>;

@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes } from '@nestjs/common';
+import { ZodValidationPipe } from 'src/zod-validation.pipe';
 import { DeleteResult, FindOptionsWhere, UpdateResult } from 'typeorm';
-import { CreateUserDto, UpdateUserDto } from './dto/user.dto';
+import { CreateUserDto, CreateUserSchema, UpdateUserDto, UpdateUserSchema } from './dto/user.dto';
 import { User } from './entities/users.entity';
 import { UsersService } from './users.service';
 
@@ -9,23 +10,25 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
+  @UsePipes(new ZodValidationPipe(CreateUserSchema))
   async create(@Body() user: CreateUserDto): Promise<User | null> {
     return this.usersService.create(user);
   }
 
   @Get()
-  findAll(): Promise<User[]> {
+  async findAll(): Promise<User[]> {
     return this.usersService.findAll();
   }
   
   @Get(':uuid')
-  findOne(@Param('uuid') uuid: FindOptionsWhere<User>): Promise<User | null> {
+  async findOne(@Param('uuid') uuid: FindOptionsWhere<User>): Promise<User | null> {
     return this.usersService.findOne(uuid);
   }
 
   @Patch(':uuid')
-  update(@Param('uuid') uuid: string, @Body() user: UpdateUserDto) : Promise<UpdateResult | null> {
-    return this.usersService.update(uuid, user);
+  @UsePipes(new ZodValidationPipe(UpdateUserSchema))
+  update(@Param('uuid') uuid: string, @Body() dto: UpdateUserDto) : Promise<UpdateResult | null> {
+    return this.usersService.update(uuid, dto);
   }
 
   @Delete(':uuid')
