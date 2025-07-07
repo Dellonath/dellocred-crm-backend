@@ -1,15 +1,15 @@
 import { z } from 'zod';
 import {
-  channelType,
-  clientSector,
-  educationLevel,
-  gender,
-  maritialStatus,
-  negotiationStatus,
-  state,
-  utmMedium,
-  utmSource
-} from '../../enums/index';
+    channelType,
+    clientSector,
+    educationLevel,
+    gender,
+    maritialStatus,
+    negotiationStatus,
+    state,
+    utmMedium,
+    utmSource
+} from '../../../enums/index';
 
 export const CreateClientSchema = z.object({
   uuid: z.string().uuid().optional(),

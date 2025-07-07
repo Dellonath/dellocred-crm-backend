@@ -1,14 +1,14 @@
-import { Client } from 'src/clients/entities/clients.entity';
 import { loanType } from 'src/enums';
-import { User } from 'src/users/entities/users.entity';
+import { Client } from 'src/resources/clients/entities/clients.entity';
+import { User } from 'src/resources/users/entities/users.entity';
 import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinColumn,
+    ManyToOne,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
 } from 'typeorm';
 loanType
 

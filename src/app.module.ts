@@ -3,10 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ClientsModule } from './clients/clients.module';
-import { MarketingModule } from './marketing/marketing.module';
-import { UsersModule } from './users/users.module';
-import { LoansModule } from './loans/loans.module';
+import { ClientsModule } from './resources/clients/clients.module';
+import { LoansModule } from './resources/loans/loans.module';
+import { MarketingModule } from './resources/marketing/marketing.module';
+import { UsersModule } from './resources/users/users.module';
 
 
 @Module({

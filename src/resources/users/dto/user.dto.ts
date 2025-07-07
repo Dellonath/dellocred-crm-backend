@@ -1,12 +1,12 @@
 import { z } from 'zod';
 import {
-  channelType,
-  educationLevel,
-  gender,
-  jobPosition,
-  maritialStatus,
-  state
-} from '../../enums/index';
+    channelType,
+    educationLevel,
+    gender,
+    jobPosition,
+    maritialStatus,
+    state
+} from '../../../enums/index';
 
 export const CreateUserSchema = z.object({
   uuid: z.string().uuid().optional(),
