@@ -24,7 +24,8 @@ import { UsersModule } from './resources/users/users.module';
     }),
     UsersModule, 
     ClientsModule, 
-    MarketingModule, LoansModule
+    MarketingModule, 
+    LoansModule
   ],
   controllers: [AppController],
   providers: [AppService],
