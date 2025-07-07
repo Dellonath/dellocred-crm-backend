@@ -37,7 +37,7 @@ export class MarketingCampaign {
     type: 'enum',
     enum: channelType,
     nullable: false,
-    comment: 'Channel where the campaign is run (e.g., online, offline or both)'
+    comment: 'Channel where the campaign is run (e.g., online, offline)'
   })
   campaignChannel: channelType;
 
