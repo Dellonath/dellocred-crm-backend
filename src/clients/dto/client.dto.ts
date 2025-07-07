@@ -5,6 +5,7 @@ import {
   educationLevel,
   gender,
   maritialStatus,
+  negotiationStatus,
   state,
   utmMedium,
   utmSource
@@ -12,6 +13,7 @@ import {
 
 export const CreateClientSchema = z.object({
   uuid: z.string().uuid().optional(),
+  negotiationStatus: z.nativeEnum(negotiationStatus).optional(),
   govId: z.string().length(11),
   firstName: z.string().min(1).max(64),
   lastName: z.string().min(1).max(64),
@@ -37,7 +39,7 @@ export const CreateClientSchema = z.object({
   utmMedium: z.nativeEnum(utmMedium).optional(),
   utmCampaign: z.string().optional(),
   createdByUserUuid: z.string().optional(),
-  isActive: z.boolean().optional(),
+  isActive: z.boolean().optional()
 });
 
 export type CreateClientDto = z.infer<typeof CreateClientSchema>;

@@ -14,9 +14,10 @@ import {
   educationLevel,
   gender,
   maritialStatus,
+  negotiationStatus,
   state,
   utmMedium,
-  utmSource,
+  utmSource
 } from '../../enums/index';
 
 @Entity({ name: 'clients' })
@@ -50,6 +51,14 @@ export class Client {
     nullable: false
   })
   lastName: string;
+
+  @Column({
+    name: 'negotiation_status',
+    type: 'enum',
+    enum: negotiationStatus,
+    nullable: false
+  })
+  negotiationStatus: negotiationStatus;
 
   @Column({
     name: 'email',
