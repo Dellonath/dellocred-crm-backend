@@ -1,18 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateMarketingDto, UpdateMarketingDto } from './dto/marketing-campaign.dto';
+import {
+  CreateMarketingCampaignDto,
+  UpdateMarketingCampaignDto
+} from './dto/marketing-campaign.dto';
 import { MarketingCampaign } from './entities/marketing-campaigns.entity';
 
 @Injectable()
 export class MarketingService {
 
   constructor(
-      @InjectRepository(MarketingCampaign)
-      private campaignsRepository: Repository<MarketingCampaign>,
-    ) {}
+    @InjectRepository(MarketingCampaign)
+    private campaignsRepository: Repository<MarketingCampaign>,
+  ) {}
 
-  create(createMarketingDto: CreateMarketingDto) {
+  create(dto: CreateMarketingCampaignDto) {
     return 'This action adds a new marketing';
   }
 
@@ -20,15 +23,15 @@ export class MarketingService {
     return `This action returns all marketing`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} marketing`;
   }
 
-  update(id: number, updateMarketingDto: UpdateMarketingDto) {
+  update(id: string, dto: UpdateMarketingCampaignDto) {
     return `This action updates a #${id} marketing`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} marketing`;
   }
 }

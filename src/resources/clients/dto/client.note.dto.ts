@@ -8,6 +8,5 @@ export const CreateClientNoteSchema = z.object({
 });
 
 export type CreateClientNoteDto = z.infer<typeof CreateClientNoteSchema>;
-
 export const UpdateClientNoteSchema = CreateClientNoteSchema.partial();
 export type UpdateClientNoteDto = z.infer<typeof UpdateClientNoteSchema>;

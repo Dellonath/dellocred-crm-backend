@@ -1,18 +1,19 @@
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from 'typeorm';
 import {
-    channelType,
-    educationLevel,
-    gender,
-    jobPosition,
-    maritialStatus,
-    state
-} from '../../../enums/index';
+  channelType,
+  educationLevel,
+  gender,
+  jobPosition,
+  maritialStatus,
+  state
+} from '../../../common/enums/enums';
+
 @Entity({ name: 'users' })
 export class User {
 

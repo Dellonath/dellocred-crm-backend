@@ -1,4 +1,4 @@
-import { loanType } from 'src/enums';
+import { loanType } from 'src/common/enums/enums';
 import { z } from 'zod';
 
 export const CreateLoanSaleSchema = z.object({
@@ -16,6 +16,5 @@ export const CreateLoanSaleSchema = z.object({
 });
 
 export type CreateLoanSaleDto = z.infer<typeof CreateLoanSaleSchema>;
-
 export const UpdateLoanSaleSchema = CreateLoanSaleSchema.partial();
 export type UpdateLoanSaleDto = z.infer<typeof UpdateLoanSaleSchema>;

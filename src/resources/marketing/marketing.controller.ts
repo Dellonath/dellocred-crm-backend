@@ -1,5 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { CreateMarketingDto, UpdateMarketingDto } from './dto/marketing-campaign.dto';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes } from '@nestjs/common';
+import { ZodValidationPipe } from 'src/zod-validation.pipe';
+import {
+  CreateMarketingCampaignDto,
+  CreateMarketingCampaignSchema,
+  UpdateMarketingCampaignDto,
+  UpdateMarketingCampaignSchema
+} from './dto/marketing-campaign.dto';
 import { MarketingService } from './marketing.service';
 
 @Controller('marketing')
@@ -7,7 +13,8 @@ export class MarketingController {
   constructor(private readonly marketingService: MarketingService) {}
 
   @Post()
-  create(@Body() createMarketingDto: CreateMarketingDto) {
+  @UsePipes(new ZodValidationPipe(CreateMarketingCampaignSchema))
+  create(@Body() createMarketingDto: CreateMarketingCampaignDto) {
     return this.marketingService.create(createMarketingDto);
   }
 
@@ -18,16 +25,17 @@ export class MarketingController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.marketingService.findOne(+id);
+    return this.marketingService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMarketingDto: UpdateMarketingDto) {
-    return this.marketingService.update(+id, updateMarketingDto);
+  @UsePipes(new ZodValidationPipe(UpdateMarketingCampaignSchema))
+  update(@Param('id') id: string, @Body() updateMarketingDto: UpdateMarketingCampaignDto) {
+    return this.marketingService.update(id, updateMarketingDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.marketingService.remove(+id);
+    return this.marketingService.remove(id);
   }
 }

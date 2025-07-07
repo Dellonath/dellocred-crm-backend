@@ -1,7 +1,7 @@
 import { BadRequestException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { channelType, utmSource } from '../../enums/index';
+import { channelType, utmSource } from '../../common/enums/enums';
 import { CreateClientDto, UpdateClientDto } from './dto/client.dto';
 import { CreateClientNoteDto } from './dto/client.note.dto';
 import { Client } from './entities/clients.entity';

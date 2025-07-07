@@ -1,9 +1,15 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes } from '@nestjs/common';
 import { ZodValidationPipe } from 'src/zod-validation.pipe';
 import { DeleteResult, FindOptionsWhere, UpdateResult } from 'typeorm';
-import { CreateUserDto, CreateUserSchema, UpdateUserDto, UpdateUserSchema } from './dto/user.dto';
+import {
+  CreateUserDto,
+  CreateUserSchema,
+  UpdateUserDto,
+  UpdateUserSchema
+} from './dto/user.dto';
 import { User } from './entities/users.entity';
 import { UsersService } from './users.service';
+
 
 @Controller('users')
 export class UsersController {

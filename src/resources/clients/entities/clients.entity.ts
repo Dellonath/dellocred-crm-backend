@@ -1,24 +1,24 @@
 import { User } from 'src/resources/users/entities/users.entity';
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    OneToOne,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from 'typeorm';
 import {
-    channelType,
-    clientSector,
-    educationLevel,
-    gender,
-    maritialStatus,
-    negotiationStatus,
-    state,
-    utmMedium,
-    utmSource
-} from '../../../enums/index';
+  channelType,
+  clientSector,
+  educationLevel,
+  gender,
+  maritialStatus,
+  negotiationStatus,
+  state,
+  utmMedium,
+  utmSource
+} from '../../../common/enums/enums';
 
 @Entity({ name: 'clients' })
 export class Client {

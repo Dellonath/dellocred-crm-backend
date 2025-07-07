@@ -1,16 +1,15 @@
-import { loanType } from 'src/enums';
+import { loanType } from 'src/common/enums/enums';
 import { Client } from 'src/resources/clients/entities/clients.entity';
 import { User } from 'src/resources/users/entities/users.entity';
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToOne,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-loanType
 
 @Entity({ 
   name: 'loan_sales' 

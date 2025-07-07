@@ -1,13 +1,13 @@
 import { User } from 'src/resources/users/entities/users.entity';
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    JoinColumn,
-    ManyToMany,
-    ManyToOne,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
 } from 'typeorm';
 import { Client } from './clients.entity';
 

@@ -1,11 +1,11 @@
 import {
-    Column,
-    CreateDateColumn,
-    Entity,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import { campaignStatus, channelType } from '../../../enums/index';
+import { campaignStatus, channelType } from '../../../common/enums/enums';
 
 @Entity({ name: 'marketing_campaigns' })
 export class MarketingCampaign {
