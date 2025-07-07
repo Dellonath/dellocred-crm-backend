@@ -1,5 +1,5 @@
 import { Client } from 'src/clients/entities/clients.entity';
-import { loanSaleStatus, loanType } from 'src/enums';
+import { loanType } from 'src/enums';
 import { User } from 'src/users/entities/users.entity';
 import {
   Column,
@@ -12,48 +12,109 @@ import {
 } from 'typeorm';
 loanType
 
-@Entity({ name: 'loan_sales' })
+@Entity({ 
+  name: 'loan_sales' 
+  
+})
 export class LoanSale {
-  @PrimaryGeneratedColumn('uuid', { name: 'uuid' })
+  @PrimaryGeneratedColumn('uuid', { 
+    name: 'uuid' 
+  })
   uuid: string;
 
-  @ManyToOne(() => Client, { nullable: false, onDelete: 'RESTRICT' })
-  @JoinColumn({ name: 'client_uuid' })
+  @ManyToOne(() => Client, 
+  { nullable: false, 
+    onDelete: 'RESTRICT' 
+  })
+  @JoinColumn({ 
+    name: 'client_uuid' 
+  })
   client: Client;
 
-  @ManyToOne(() => User, { nullable: false, onDelete: 'RESTRICT' })
-  @JoinColumn({ name: 'user_uuid' })
+  @ManyToOne(() => User, { 
+    nullable: false, 
+    onDelete: 'RESTRICT' 
+  })
+  @JoinColumn({ 
+    name: 'user_uuid' 
+    
+  })
   user: User;
 
-  @Column({ name: 'loan_type', type: 'enum', enum: loanType, nullable: true })
+  @Column({ 
+    name: 'loan_type', 
+    type: 'enum', 
+    enum: loanType, 
+    nullable: true 
+  })
   loanProduct: loanType;
 
-  @Column({ name: 'loan_amount', type: 'decimal', precision: 14, scale: 2, nullable: false })
+  @Column({ 
+    name: 'loan_amount', 
+    type: 'decimal', 
+    precision: 14, 
+    scale: 2, 
+    nullable: false 
+  })
   loanAmount: number;
 
-  @Column({ name: 'commission_percentage', type: 'decimal', precision: 5, scale: 2, nullable: false })
+  @Column({ 
+    name: 'installments_quantity', 
+    type: 'int', 
+    nullable: false 
+  })
+  installmentsQuantity: number;
+
+  @Column({ 
+    name: 'sold_rate', 
+    type: 'decimal', 
+    precision: 5, 
+    scale: 2, 
+    nullable: false 
+  })
+  soldRate: number; 
+
+  @Column({ 
+    name: 'commission_percentage', 
+    type: 'decimal', 
+    precision: 5, 
+    scale: 2, 
+    nullable: false 
+  })
   commissionPercentage: number;
 
-  @Column({ name: 'commission_amount', type: 'decimal', precision: 14, scale: 2, nullable: false })
+  @Column({ 
+    name: 'commission_amount', 
+    type: 'decimal', 
+    precision: 14, 
+    scale: 2, 
+    nullable: false 
+  })
   commissionAmount: number;
 
-  @Column({
-    name: 'status',
-    type: 'enum',
-    enum: loanSaleStatus,
-    default: loanSaleStatus.PENDING,
+  @Column({ 
+    name: 'sale_date', 
+    type: 'datetime', 
+    nullable: false 
   })
-  status: loanSaleStatus;
-
-  @Column({ name: 'sale_date', type: 'datetime', nullable: false })
   saleDate: Date;
 
-  @Column({ name: 'notes', type: 'text', nullable: true })
+  @Column({ 
+    name: 'notes', 
+    type: 'text', 
+    nullable: true 
+  })
   notes: string;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  @CreateDateColumn({ 
+    name: 'created_at', 
+    type: 'timestamp' 
+  })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: 'updated_at', type: 'timestamp' })
+  @UpdateDateColumn({ 
+    name: 'updated_at', 
+    type: 'timestamp' 
+  })
   updatedAt: Date;
 }

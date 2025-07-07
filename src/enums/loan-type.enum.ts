@@ -4,5 +4,6 @@ export enum loanType {
   CONSIGNMENT_LOAN = 'consignment_loan',
   VEHICLE_LOAN = 'vehicle_loan',
   HOME_LOAN = 'home_loan',
+  FGTS = 'fgts',
   OTHER = 'other'
 }

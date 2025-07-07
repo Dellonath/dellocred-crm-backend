@@ -11,15 +11,15 @@ export class LoansService {
     return `This action returns all loans`;
   }
 
-  findOne(id: number) {
+  findOne(id: string) {
     return `This action returns a #${id} loan`;
   }
 
-  update(id: number, dto: UpdateLoanSaleDto) {
+  update(id: string, dto: UpdateLoanSaleDto) {
     return `This action updates a #${id} loan`;
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} loan`;
   }
 }
