@@ -93,7 +93,7 @@ export class LoanSale {
 
   @Column({ 
     name: 'sale_date', 
-    type: 'datetime', 
+    type: 'date', 
     nullable: false 
   })
   saleDate: Date;

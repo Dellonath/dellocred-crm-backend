@@ -43,7 +43,7 @@ export class MarketingCampaign {
 
   @Column({
     name: 'start_date',
-    type: 'datetime',
+    type: 'date',
     nullable: false,
     comment: 'Start date of the campaign'
   })
@@ -51,7 +51,7 @@ export class MarketingCampaign {
 
   @Column({
     name: 'end_date',
-    type: 'datetime',
+    type: 'date',
     nullable: false,
     comment: 'End date of the campaign'
   })

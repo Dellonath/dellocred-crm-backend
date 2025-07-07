@@ -3,13 +3,13 @@ version: '3.9'
 services:
 
   dellocred-database:
-    image: mysql:latest
+    image: postgres:latest
     container_name: dellocred_crm_database
     env_file: .env
     ports:
-      - "3307:3306"
+      - "5432:5432"
     volumes:
-      - dbdata:/var/lib/mysql
+      - pgdata:/var/lib/mysql
     networks:
       - dellocred-net
 
@@ -32,4 +32,4 @@ networks:
     driver: bridge
 
 volumes:
-  dbdata:
+  pgdata:
