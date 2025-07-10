@@ -18,7 +18,8 @@ Content-Type: application/json
   "email": "carla4121.oliveira@hotmail.com",
   "phoneNumber": "+4510637777777",
   "birthDate": "1995",
-  "gender": "f"
+  "gender": "f",
+  "channelType": "online"
 }
 
 ### add form client
@@ -65,7 +66,8 @@ Content-Type: application/json
     "utmSource": "google",
     "utmMedium": "cpc",
     "utmCampaign": "summer-sale",
-    "isActive": true
+    "isActive": true,
+    "channelType": "online"
   },
   {
     "govId": "23456789012",
@@ -91,7 +93,8 @@ Content-Type: application/json
     "utmSource": "facebook",
     "utmMedium": "social",
     "utmCampaign": "autumn-campaign",
-    "isActive": true
+    "isActive": true,
+    "channelType": "online"
   },
   {
     "govId": "34567890123",
@@ -117,7 +120,8 @@ Content-Type: application/json
     "utmSource": "linkedin",
     "utmMedium": "social",
     "utmCampaign": "winter-promo",
-    "isActive": true
+    "isActive": true,
+    "channelType": "offline"
   }
 ]
 

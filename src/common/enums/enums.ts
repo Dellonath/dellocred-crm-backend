@@ -75,6 +75,8 @@ export enum maritialStatus {
 }
 
 export enum negotiationStatus {
+  UNASSIGNED = 'unassigned',
+  ASSIGNED = 'assigned',
   IN_NEGOTIATION = 'in_negotiation',
   NOT_INTERESTED = 'not_interested',
   PAID = 'paid',

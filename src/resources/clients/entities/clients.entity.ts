@@ -56,7 +56,8 @@ export class Client {
     name: 'negotiation_status',
     type: 'enum',
     enum: negotiationStatus,
-    nullable: false
+    nullable: false,
+    default: negotiationStatus.UNASSIGNED
   })
   negotiationStatus: negotiationStatus;
 
