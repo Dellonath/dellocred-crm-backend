@@ -11,6 +11,7 @@ import {
   utmSource
 } from '../../../common/enums/enums';
 
+
 export const CreateClientSchema = z.object({
   uuid: z.string().uuid().optional(),
   negotiationStatus: z.nativeEnum(negotiationStatus).optional(),

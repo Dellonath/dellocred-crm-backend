@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes } from '@nestjs/common';
-import { ZodValidationPipe } from 'src/zod-validation.pipe';
+import { ZodValidationPipe } from '../../zod-validation.pipe';
 import {
   CreateLoanSaleDto,
   CreateLoanSaleSchema,
@@ -7,7 +7,8 @@ import {
   UpdateLoanSaleSchema
 } from './dto/loan-sale.dto';
 import { LoansService } from './loans.service';
-ZodValidationPipe
+
+
 @Controller('loans')
 export class LoansController {
 

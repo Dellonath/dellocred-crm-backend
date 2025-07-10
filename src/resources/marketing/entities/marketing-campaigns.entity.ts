@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { campaignStatus, channelType } from '../../../common/enums/enums';
 
+
 @Entity({ name: 'marketing_campaigns' })
 export class MarketingCampaign {
 

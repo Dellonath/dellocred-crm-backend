@@ -8,6 +8,7 @@ import {
   state
 } from '../../../common/enums/enums';
 
+
 export const CreateUserSchema = z.object({
   uuid: z.string().uuid().optional(),
   govId: z.string().length(11),

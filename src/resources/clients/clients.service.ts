@@ -7,6 +7,7 @@ import { CreateClientNoteDto } from './dto/client.note.dto';
 import { Client } from './entities/clients.entity';
 import { ClientNote } from './entities/clients.notes.entity';
 
+
 @Injectable()
 export class ClientsService {
 

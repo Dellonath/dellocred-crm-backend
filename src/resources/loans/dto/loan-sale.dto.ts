@@ -1,5 +1,6 @@
-import { loanType } from 'src/common/enums/enums';
 import { z } from 'zod';
+import { loanType } from '../../../common/enums/enums';
+
 
 export const CreateLoanSaleSchema = z.object({
   uuid: z.string().uuid().optional(),

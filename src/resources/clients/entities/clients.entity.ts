@@ -1,4 +1,3 @@
-import { User } from 'src/resources/users/entities/users.entity';
 import {
   Column,
   CreateDateColumn,
@@ -19,6 +18,8 @@ import {
   utmMedium,
   utmSource
 } from '../../../common/enums/enums';
+import { User } from '../../users/entities/users.entity';
+
 
 @Entity({ name: 'clients' })
 export class Client {

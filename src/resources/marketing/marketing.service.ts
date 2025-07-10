@@ -7,6 +7,7 @@ import {
 } from './dto/marketing-campaign.dto';
 import { MarketingCampaign } from './entities/marketing-campaigns.entity';
 
+
 @Injectable()
 export class MarketingService {
 

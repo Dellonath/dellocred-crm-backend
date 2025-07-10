@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { campaignStatus, channelType } from '../../../common/enums/enums';
 
+
 export const CreateMarketingCampaignSchema = z.object({
   uuid: z.string().uuid().optional(),
   campaignName: z.string().min(1).max(150),

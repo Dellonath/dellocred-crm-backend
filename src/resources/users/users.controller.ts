@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes } from '@nestjs/common';
-import { ZodValidationPipe } from 'src/zod-validation.pipe';
 import { DeleteResult, FindOptionsWhere, UpdateResult } from 'typeorm';
+import { ZodValidationPipe } from '../../zod-validation.pipe';
 import {
   CreateUserDto,
   CreateUserSchema,

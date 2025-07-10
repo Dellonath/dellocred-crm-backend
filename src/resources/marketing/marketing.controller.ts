@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, UsePipes } from '@nestjs/common';
-import { ZodValidationPipe } from 'src/zod-validation.pipe';
+import { ZodValidationPipe } from '../../zod-validation.pipe';
 import {
   CreateMarketingCampaignDto,
   CreateMarketingCampaignSchema,

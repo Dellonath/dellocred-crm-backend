@@ -14,6 +14,7 @@ import {
   state
 } from '../../../common/enums/enums';
 
+
 @Entity({ name: 'users' })
 export class User {
 

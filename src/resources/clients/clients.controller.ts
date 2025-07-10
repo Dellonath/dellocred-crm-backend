@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, UsePipes } from '@nestjs/common';
-import { ZodValidationPipe } from 'src/zod-validation.pipe';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { ZodValidationPipe } from '../../zod-validation.pipe';
 import { ClientsService } from './clients.service';
 import {
   CreateClientDto,
@@ -11,6 +11,7 @@ import {
 import { CreateClientNoteDto, CreateClientNoteSchema } from './dto/client.note.dto';
 import { Client } from './entities/clients.entity';
 import { ClientNote } from './entities/clients.notes.entity';
+
 
 @Controller('clients')
 export class ClientsController {

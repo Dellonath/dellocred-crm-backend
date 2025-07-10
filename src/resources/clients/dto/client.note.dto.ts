@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+
 export const CreateClientNoteSchema = z.object({
   uuid: z.string().uuid().optional(),
   clientUuid: z.string().uuid(),

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLoanSaleDto, UpdateLoanSaleDto } from './dto/loan-sale.dto';
 
+
 @Injectable()
 export class LoansService {
   create(dto: CreateLoanSaleDto) {
