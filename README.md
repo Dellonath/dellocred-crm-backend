@@ -94,6 +94,21 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
+## Render
+The application is deployed in render. Use this documentation for render's commands: [Render CLI](https://render.com/docs/cli)
+
+The backend domain is here: [Backend Application](https://dellocred-crm-backend.onrender.com)
+
+Useful commands: <br>
+`render services` list all services 
+`render deploys list <service_id>` command to list all service_id's deployments
+`render deploys create <service_id>` command to deploy the last (os specific commit)
+
+## Database (Supabase)
+The database is hosted in Supabase. It's a Postgres instance.
+
+The database: [Backend Application](https://supabase.com/dashboard/project/ixlnxtuchmmokcjtzfsm)
+
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
