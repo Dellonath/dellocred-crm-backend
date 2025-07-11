@@ -1,0 +1,165 @@
+### list all clients
+GET http://localhost:3000/clients
+
+### get client
+GET http://localhost:3000/clients/13208992696
+
+### list active clients
+GET http://localhost:3000/clients/actives
+
+### add client
+POST http://localhost:3000/clients
+Content-Type: application/json
+
+{
+  "govId": "01122410313",
+  "firstName": "Carla",
+  "lastName": "Oliveira",
+  "email": "carla4121.oliveira@hotmail.com",
+  "phoneNumber": "+4510637777777",
+  "birthDate": "1995",
+  "gender": "f",
+  "channelType": "online"
+}
+
+### add form client
+POST http://localhost:3000/clients/form
+Content-Type: application/json
+
+{
+  "firstName": "Carla",
+  "lastName": "Oliveira",
+  "email": "carla.oliveira@example.com",
+  "phoneNumber": "+5511777777777",
+  "birthDate": "1995-09-20",
+  "gender": "f"
+}
+
+
+### post batch clients
+POST http://localhost:3000/clients/batch/
+Content-Type: application/json
+
+[
+  {
+    "uuid": "aeac44ee-6371-4b30-858f-a7855ae0036f",
+    "govId": "12345678901",
+    "firstName": "Alice",
+    "lastName": "Silva",
+    "email": "alice.silva@example.com",
+    "phoneNumber": "+5511999999999",
+    "birthDate": "1990-01-01",
+    "gender": "f",
+    "occupation": "Engineer",
+    "maritialStatus": "single",
+    "educationLevel": "bachelor",
+    "wage": 5000.00,
+    "clientSector": "private",
+    "country": "Brazil",
+    "state": "sp",
+    "city": "São Paulo",
+    "addressStreet": "Av. Paulista",
+    "addressNumber": 1000,
+    "addressComplement": "Apt 101",
+    "postalCode": "01310-100",
+    "originChannel": "website",
+    "utmSource": "google",
+    "utmMedium": "cpc",
+    "utmCampaign": "summer-sale",
+    "isActive": true,
+    "channelType": "online"
+  },
+  {
+    "govId": "23456789012",
+    "firstName": "Bruno",
+    "lastName": "Souza",
+    "email": "bruno.souza@example.com",
+    "phoneNumber": "+5511888888888",
+    "birthDate": "1985-05-15",
+    "gender": "m",
+    "occupation": "Designer",
+    "maritialStatus": "married",
+    "educationLevel": "master",
+    "wage": 7000.00,
+    "clientSector": "public",
+    "country": "Brazil",
+    "state": "rj",
+    "city": "Rio de Janeiro",
+    "addressStreet": "Rua das Laranjeiras",
+    "addressNumber": 200,
+    "addressComplement": "Casa",
+    "postalCode": "22240-003",
+    "originChannel": "referral",
+    "utmSource": "facebook",
+    "utmMedium": "social",
+    "utmCampaign": "autumn-campaign",
+    "isActive": true,
+    "channelType": "online"
+  },
+  {
+    "govId": "34567890123",
+    "firstName": "Carla",
+    "lastName": "Oliveira",
+    "email": "carla.oliveira@example.com",
+    "phoneNumber": "+5511777777777",
+    "birthDate": "1995-09-20",
+    "gender": "f",
+    "occupation": "Developer",
+    "maritialStatus": "single",
+    "educationLevel": "doctorate",
+    "wage": 9000.00,
+    "clientSector": "private",
+    "country": "Brazil",
+    "state": "mg",
+    "city": "Belo Horizonte",
+    "addressStreet": "Av. Afonso Pena",
+    "addressNumber": 300,
+    "addressComplement": "Sala 10",
+    "postalCode": "30130-003",
+    "originChannel": "website",
+    "utmSource": "linkedin",
+    "utmMedium": "social",
+    "utmCampaign": "winter-promo",
+    "isActive": true,
+    "channelType": "offline"
+  }
+]
+
+### path=ch
+PATCH  http://localhost:3000/clients/23456789012
+Content-Type: application/json
+
+{
+"addressComplement": "Casa",
+"addressNeighborhood": "asdasdasd",
+"addressNumber": 200,
+"addressStreet": "Rua das Laranjeiras",
+"birthDate": "1985-05-15",
+"channelType": "online",
+"city": "Rio de Janeiro",
+"clientSector": "public",
+"country": "Brazil",
+"createdAt": "2025-07-03T22:15:53.199Z",
+"educationLevel": "master",
+"email": "bruno.souza@example.com",
+"firstName": "Bruno",
+"gender": "f",
+"govId": "23456789012",
+"isActive": true,
+"lastName": "Souza",
+"maritialStatus": "married",
+"occupation": "Designer",
+"phoneNumber": "+5511888888888",
+"postalCode": "22240003",
+"state": "sp",
+"updatedAt": "2025-07-04T01:16:33.000Z",
+"utmCampaign": "autumn-campaign",
+"utmMedium": "email",
+"utmSource": "instagram",
+"uuid": "759e5458-55f8-49f7-b291-e7e6f0868132",
+"wage": 4000.00
+}
+
+
+### post batch clients
+DELETE http://localhost:3000/clients/34567890123 

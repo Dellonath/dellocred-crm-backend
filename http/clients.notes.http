@@ -1,0 +1,49 @@
+### list all clients notes
+GET http://localhost:3000/clients/notes
+
+### list all client notes
+GET http://localhost:3000/clients/notes/aeac44ee-6371-4b30-858f-a7855ae0036f
+
+### add client note
+POST http://localhost:3000/clients/notes
+Content-Type: application/json
+
+{
+    "clientUuid": "759e5458-55f8-49f7-b291-e7e6f0868132",
+    "userUuid": "49590b01-81b3-49bc-9a16-0f4d368a95d5",
+    "note": "Barrado pelo banco, documentos em baixa qualidade"
+  }
+
+### post batch clients notes
+POST http://localhost:3000/clients/notes/batch
+Content-Type: application/json
+
+[
+  {
+    "clientUuid": "aeac44ee-6371-4b30-858f-a7855ae0036f",
+    "userUuid": "49590b01-81b3-49bc-9a16-0f4d368a95d5",
+    "note": "Cliente demonstrou interesse, ligar em um mês"
+  },
+  {
+    "clientUuid": "aeac44ee-6371-4b30-858f-a7855ae0036f",
+    "userUuid": "49590b01-81b3-49bc-9a16-0f4d368a95d5",
+    "note": "Cliente está buscando uma maneira de emprestar"
+  },
+  {
+    "clientUuid": "aeac44ee-6371-4b30-858f-a7855ae0036f",
+    "userUuid": "49590b01-81b3-49bc-9a16-0f4d368a95d5",
+    "note": "Barrado pelo banco, documentos em baixa qualidade"
+  }
+]
+
+### path=ch
+PATCH  http://localhost:3000/clients/34567890123
+Content-Type: application/json
+
+{
+  "birthDate": "1990-01-01"
+}
+
+
+### post batch clients
+DELETE http://localhost:3000/clients/34567890123 
