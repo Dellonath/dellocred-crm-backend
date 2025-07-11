@@ -23,7 +23,6 @@ services:
       - "3000:3000"
     networks:
       - dellocred-net
-    command: sh -c "sleep 10 && npm run start:dev"
     depends_on:
       - dellocred-database
 
