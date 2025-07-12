@@ -1,6 +1,6 @@
-import { z } from 'zod';
-import { loanType } from '../../../common/enums/enums';
+import { z } from "zod";
 
+import { loanType } from "../../../common/enums/enums";
 
 export const CreateLoanSaleSchema = z.object({
   uuid: z.string().uuid().optional(),
@@ -13,7 +13,7 @@ export const CreateLoanSaleSchema = z.object({
   commissionPercentage: z.number(),
   commissionAmount: z.number(),
   saleDate: z.coerce.date(),
-  notes: z.string().optional(),
+  notes: z.string().optional()
 });
 
 export type CreateLoanSaleDto = z.infer<typeof CreateLoanSaleSchema>;
