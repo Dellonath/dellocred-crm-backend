@@ -8,9 +8,11 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UsePipes
 } from "@nestjs/common";
 import { DeleteResult, UpdateResult } from "typeorm";
+import z from "zod";
 
 import { ZodValidationPipe } from "../../zod-validation.pipe";
 import { ClientsService } from "./clients.service";
@@ -26,6 +28,12 @@ import {
 } from "./dto/client.note.dto";
 import { Client } from "./entities/clients.entity";
 import { ClientNote } from "./entities/clients.notes.entity";
+
+const findAllClienteQueryParamsSchema = z.object({
+  status: z.enum(["all", "active", "inactive"]).optional(),
+  govId: z.string().optional(),
+  page: z.coerce.number().default(1)
+});
 
 @Controller("clients")
 export class ClientsController {
@@ -52,8 +60,17 @@ export class ClientsController {
   }
 
   @Get()
-  async findAll(): Promise<Client[]> {
-    return await this.clientsService.findAll();
+  @UsePipes(new ZodValidationPipe(findAllClienteQueryParamsSchema))
+  async findAll(
+    @Query() query: z.infer<typeof findAllClienteQueryParamsSchema>
+  ): Promise<Client[]> {
+    const { govId, status, page } = query;
+
+    return await this.clientsService.findAll({
+      govId,
+      status,
+      page
+    });
   }
 
   @Get("actives")

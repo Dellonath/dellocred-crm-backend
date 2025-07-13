@@ -55,8 +55,29 @@ export class ClientsService {
     );
   }
 
-  async findAll(): Promise<Client[]> {
-    return await this.clientRepository.find();
+  async findAll({
+    govId,
+    status,
+    page
+  }: {
+    govId?: string;
+    status?: "all" | "active" | "inactive";
+    page: number;
+  }): Promise<Client[]> {
+    const statusFilter = {
+      all: undefined,
+      active: true,
+      inactive: false
+    };
+
+    return await this.clientRepository.find({
+      where: {
+        govId,
+        isActive: statusFilter[status || "all"]
+      },
+      take: 10,
+      skip: (page - 1) * 10
+    });
   }
 
   async findAllClientsNotes(): Promise<ClientNote[]> {
