@@ -1,4 +1,5 @@
-import { z } from 'zod';
+import { z } from "zod";
+
 import {
   channelType,
   clientSector,
@@ -9,8 +10,7 @@ import {
   state,
   utmMedium,
   utmSource
-} from '../../../common/enums/enums';
-
+} from "../../../common/enums/enums";
 
 export const CreateClientSchema = z.object({
   uuid: z.string().uuid().optional(),
@@ -19,7 +19,11 @@ export const CreateClientSchema = z.object({
   firstName: z.string().min(1).max(64),
   lastName: z.string().min(1).max(64),
   email: z.string().email().max(64),
-  phoneNumber: z.string().regex(/^\+?\d{10,15}$/).min(1).max(20),
+  phoneNumber: z
+    .string()
+    .regex(/^\+?\d{10,15}$/)
+    .min(1)
+    .max(20),
   channelType: z.nativeEnum(channelType).optional(),
   birthDate: z.coerce.date().optional(),
   gender: z.nativeEnum(gender).optional(),

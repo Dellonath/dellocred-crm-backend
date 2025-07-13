@@ -2,23 +2,23 @@ import {
   BadRequestException,
   HttpStatus,
   Injectable,
-  NotFoundException,
-} from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
-import { channelType, utmSource } from '../../common/enums/enums';
-import { CreateClientDto, UpdateClientDto } from './dto/client.dto';
-import { CreateClientNoteDto } from './dto/client.note.dto';
-import { Client } from './entities/clients.entity';
-import { ClientNote } from './entities/clients.notes.entity';
+  NotFoundException
+} from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { DeleteResult, Repository, UpdateResult } from "typeorm";
 
+import { channelType, utmSource } from "../../common/enums/enums";
+import { CreateClientDto, UpdateClientDto } from "./dto/client.dto";
+import { CreateClientNoteDto } from "./dto/client.note.dto";
+import { Client } from "./entities/clients.entity";
+import { ClientNote } from "./entities/clients.notes.entity";
 
 @Injectable()
 export class ClientsService {
   constructor(
     @InjectRepository(Client) private clientRepository: Repository<Client>,
     @InjectRepository(ClientNote)
-    private clientNotesRepository: Repository<ClientNote>,
+    private clientNotesRepository: Repository<ClientNote>
   ) {}
 
   async create(dto: CreateClientDto): Promise<Client> {
@@ -41,42 +41,42 @@ export class ClientsService {
   }
 
   async createByBatch(
-    dtoBatch: CreateClientDto[],
+    dtoBatch: CreateClientDto[]
   ): Promise<{ statusCode?: HttpStatus; message?: string }[]> {
     return Promise.all(
       dtoBatch.map(async (dto) => {
         try {
           const client = await this.clientRepository.save(dto);
-          return { statusCode: HttpStatus.CREATED, message: 'OK' };
+          return { statusCode: HttpStatus.CREATED, message: "OK" };
         } catch (error) {
           return { statusCode: HttpStatus.BAD_REQUEST, message: error.message };
         }
-      }),
+      })
     );
   }
 
   async findAll({
     govId,
     status,
-    page,
+    page
   }: {
     govId?: string;
-    status?: 'all' | 'active' | 'inactive';
+    status?: "all" | "active" | "inactive";
     page: number;
   }): Promise<Client[]> {
     const statusFilter = {
       all: undefined,
       active: true,
-      inactive: false,
+      inactive: false
     };
 
     return await this.clientRepository.find({
       where: {
         govId,
-        isActive: statusFilter[status || 'all'],
+        isActive: statusFilter[status || "all"]
       },
       take: 10,
-      skip: (page - 1) * 10,
+      skip: (page - 1) * 10
     });
   }
 
@@ -86,19 +86,19 @@ export class ClientsService {
 
   async findAllClientNotes(clientUuid: string): Promise<ClientNote[]> {
     return await this.clientNotesRepository.find({
-      where: { clientUuid: { uuid: clientUuid } },
+      where: { clientUuid: { uuid: clientUuid } }
     });
   }
 
   async findAllActives(): Promise<Client[]> {
     return await this.clientRepository.find({
-      where: { isActive: true },
+      where: { isActive: true }
     });
   }
 
   async findOneByGovId(govId: string): Promise<Client> {
     const client = await this.clientRepository.findOne({
-      where: { govId },
+      where: { govId }
     });
     if (!client) {
       throw new NotFoundException(`Client with govId ${govId} not found`);
@@ -111,7 +111,7 @@ export class ClientsService {
       const note = this.clientNotesRepository.create({
         ...dto,
         clientUuid: { uuid: dto.clientUuid } as any,
-        userUuid: { uuid: dto.userUuid } as any,
+        userUuid: { uuid: dto.userUuid } as any
       });
       return await this.clientNotesRepository.save(note);
     } catch (error) {
@@ -121,7 +121,7 @@ export class ClientsService {
 
   async update(
     govId: string,
-    dto: UpdateClientDto,
+    dto: UpdateClientDto
   ): Promise<UpdateResult | null> {
     return await this.clientRepository.update({ govId }, dto);
   }

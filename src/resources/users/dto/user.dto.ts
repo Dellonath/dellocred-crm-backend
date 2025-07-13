@@ -1,4 +1,5 @@
-import { z } from 'zod';
+import { z } from "zod";
+
 import {
   channelType,
   educationLevel,
@@ -6,8 +7,7 @@ import {
   jobPosition,
   maritialStatus,
   state
-} from '../../../common/enums/enums';
-
+} from "../../../common/enums/enums";
 
 export const CreateUserSchema = z.object({
   uuid: z.string().uuid().optional(),
@@ -30,7 +30,7 @@ export const CreateUserSchema = z.object({
   addressNumber: z.number().optional(),
   addressComplement: z.string().optional(),
   postalCode: z.string().min(1).max(20).optional(),
-  isActive: z.boolean().optional(),
+  isActive: z.boolean().optional()
 });
 
 export type CreateUserDto = z.infer<typeof CreateUserSchema>;

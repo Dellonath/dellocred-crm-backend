@@ -6,7 +6,8 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn
-} from 'typeorm';
+} from "typeorm";
+
 import {
   channelType,
   clientSector,
@@ -17,45 +18,43 @@ import {
   state,
   utmMedium,
   utmSource
-} from '../../../common/enums/enums';
-import { User } from '../../users/entities/users.entity';
+} from "../../../common/enums/enums";
+import { User } from "../../users/entities/users.entity";
 
-
-@Entity({ name: 'clients' })
+@Entity({ name: "clients" })
 export class Client {
-
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   uuid: string;
 
   @Column({
-    name: 'gov_id',
-    type: 'varchar',
+    name: "gov_id",
+    type: "varchar",
     length: 11,
     unique: true,
     nullable: false,
-    comment: 'Government-issued identification number (CPF), 11 digits, unique'
+    comment: "Government-issued identification number (CPF), 11 digits, unique"
   })
   govId: string;
 
   @Column({
-    name: 'first_name',
-    type: 'varchar',
+    name: "first_name",
+    type: "varchar",
     length: 64,
     nullable: false
   })
   firstName: string;
 
   @Column({
-    name: 'last_name',
-    type: 'varchar',
+    name: "last_name",
+    type: "varchar",
     length: 64,
     nullable: false
   })
   lastName: string;
 
   @Column({
-    name: 'negotiation_status',
-    type: 'enum',
+    name: "negotiation_status",
+    type: "enum",
     enum: negotiationStatus,
     nullable: false,
     default: negotiationStatus.UNASSIGNED
@@ -63,8 +62,8 @@ export class Client {
   negotiationStatus: negotiationStatus;
 
   @Column({
-    name: 'email',
-    type: 'varchar',
+    name: "email",
+    type: "varchar",
     length: 64,
     unique: true,
     nullable: false
@@ -72,8 +71,8 @@ export class Client {
   email: string;
 
   @Column({
-    name: 'phone_number',
-    type: 'varchar',
+    name: "phone_number",
+    type: "varchar",
     length: 64,
     unique: true,
     nullable: false
@@ -81,32 +80,33 @@ export class Client {
   phoneNumber: string;
 
   @Column({
-    name: 'channel_type',
-    type: 'enum',
+    name: "channel_type",
+    type: "enum",
     enum: channelType,
     nullable: false,
-    comment: 'Channel type through which the client was acquired (online, offline, etc.)'
+    comment:
+      "Channel type through which the client was acquired (online, offline, etc.)"
   })
   channelType: channelType;
 
   @Column({
-    name: 'birth_date',
-    type: 'date',
+    name: "birth_date",
+    type: "date",
     nullable: true
   })
   birthDate: Date;
 
   @Column({
-    name: 'gender',
-    type: 'enum',
+    name: "gender",
+    type: "enum",
     enum: gender,
     nullable: true
   })
   gender: gender;
 
   @Column({
-    name: 'occupation',
-    type: 'varchar',
+    name: "occupation",
+    type: "varchar",
     length: 64,
     nullable: true,
     comment: "Client's occupation or job title (optional)"
@@ -114,24 +114,24 @@ export class Client {
   occupation: string;
 
   @Column({
-    name: 'maritial_status',
-    type: 'enum',
+    name: "maritial_status",
+    type: "enum",
     enum: maritialStatus,
     nullable: true
   })
   maritialStatus: maritialStatus;
 
   @Column({
-    name: 'education_level',
-    type: 'enum',
+    name: "education_level",
+    type: "enum",
     enum: educationLevel,
     nullable: true
   })
   educationLevel: educationLevel;
 
   @Column({
-    name: 'wage',
-    type: 'decimal',
+    name: "wage",
+    type: "decimal",
     precision: 12,
     scale: 2,
     nullable: true
@@ -139,124 +139,124 @@ export class Client {
   wage: number;
 
   @Column({
-    name: 'client_sector',
-    type: 'enum',
+    name: "client_sector",
+    type: "enum",
     enum: clientSector,
     nullable: true
   })
   clientSector: clientSector;
 
   @Column({
-    name: 'country',
-    type: 'varchar',
+    name: "country",
+    type: "varchar",
     length: 64,
-    default: 'brazil'
+    default: "brazil"
   })
   country: string;
 
   @Column({
-    name: 'state',
-    type: 'enum',
+    name: "state",
+    type: "enum",
     enum: state,
     nullable: true
   })
   state: state;
 
   @Column({
-    name: 'city',
-    type: 'varchar',
+    name: "city",
+    type: "varchar",
     length: 64,
     nullable: true
   })
   city: string;
 
   @Column({
-    name: 'address_neighborhood',
-    type: 'varchar',
+    name: "address_neighborhood",
+    type: "varchar",
     length: 64,
     nullable: true
   })
   addressNeighborhood: string;
 
   @Column({
-    name: 'address_street',
-    type: 'varchar',
+    name: "address_street",
+    type: "varchar",
     length: 64,
     nullable: true
   })
   addressStreet: string;
 
   @Column({
-    name: 'address_number',
-    type: 'int',
+    name: "address_number",
+    type: "int",
     nullable: true
   })
   addressNumber: number;
 
   @Column({
-    name: 'address_complement',
-    type: 'varchar',
+    name: "address_complement",
+    type: "varchar",
     length: 64,
     nullable: true,
-    comment: 'Additional address information (optional)'
+    comment: "Additional address information (optional)"
   })
   addressComplement: string;
 
   @Column({
-    name: 'postal_code',
-    type: 'varchar',
+    name: "postal_code",
+    type: "varchar",
     length: 20,
     nullable: true
   })
   postalCode: string;
 
   @Column({
-    name: 'utm_source',
-    type: 'enum',
+    name: "utm_source",
+    type: "enum",
     enum: utmSource,
     nullable: true,
-    comment: 'UTM source for marketing attribution (optional)'
+    comment: "UTM source for marketing attribution (optional)"
   })
   utmSource: utmSource;
 
   @Column({
-    name: 'utm_medium',
-    type: 'enum',
+    name: "utm_medium",
+    type: "enum",
     enum: utmMedium,
     nullable: true,
-    comment: 'UTM medium for marketing attribution (optional)'
+    comment: "UTM medium for marketing attribution (optional)"
   })
   utmMedium: utmMedium;
 
   @Column({
-    name: 'utm_campaign',
-    type: 'varchar',
+    name: "utm_campaign",
+    type: "varchar",
     length: 100,
     nullable: true,
-    comment: 'UTM campaign for marketing attribution (optional)'
+    comment: "UTM campaign for marketing attribution (optional)"
   })
   utmCampaign: string;
 
   @OneToOne(() => User, { nullable: true })
-  @JoinColumn({ name: 'user_uuid' })
+  @JoinColumn({ name: "user_uuid" })
   userUuid: User;
 
   @Column({
-    name: 'is_active',
-    type: 'boolean',
+    name: "is_active",
+    type: "boolean",
     default: true
   })
   isActive: boolean;
 
   @CreateDateColumn({
-    name: 'created_at',
-    type: 'timestamp'
+    name: "created_at",
+    type: "timestamp"
   })
   createdAt: Date;
 
   @UpdateDateColumn({
-    name: 'updated_at',
-    type: 'timestamp'
+    name: "updated_at",
+    type: "timestamp"
   })
   updatedAt: Date;
 }
