@@ -90,10 +90,34 @@ export class ClientsService {
     });
   }
 
-  async findAllActives(): Promise<Client[]> {
-    return await this.clientRepository.find({
-      where: { isActive: true }
+  async findAllActives({ page = 1 }: { page?: number }): Promise<{
+    clients: Client[];
+    metadata: {
+      count: number;
+      page: number;
+      totalPages: number;
+    };
+  }> {
+    const itemsPerPage = 10;
+
+    const [clients, count] = await this.clientRepository.findAndCount({
+      where: {
+        isActive: true
+      },
+      take: itemsPerPage,
+      skip: (page - 1) * 10
     });
+
+    const totalPages = Math.ceil(count / itemsPerPage);
+
+    return {
+      clients,
+      metadata: {
+        count,
+        page,
+        totalPages
+      }
+    };
   }
 
   async findOneByGovId(govId: string): Promise<Client> {

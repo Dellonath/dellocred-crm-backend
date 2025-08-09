@@ -6,6 +6,7 @@ import {
   HttpCode,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
   Query,
@@ -59,23 +60,18 @@ export class ClientsController {
     return await this.clientsService.createByBatch(dto);
   }
 
-  @Get()
-  @UsePipes(new ZodValidationPipe(findAllClienteQueryParamsSchema))
-  async findAll(
-    @Query() query: z.infer<typeof findAllClienteQueryParamsSchema>
-  ): Promise<Client[]> {
-    const { govId, status, page } = query;
-
-    return await this.clientsService.findAll({
-      govId,
-      status,
-      page
-    });
-  }
-
-  @Get("actives")
-  async findAllActives(): Promise<Client[]> {
-    return await this.clientsService.findAllActives();
+  @Get("/actives")
+  async findAllActives(
+    @Query("page", new ParseIntPipe({ optional: true })) page?: number
+  ): Promise<{
+    clients: Client[];
+    metadata: {
+      count: number;
+      page: number;
+      totalPages: number;
+    };
+  }> {
+    return await this.clientsService.findAllActives({ page });
   }
 
   @Get(":govId")
